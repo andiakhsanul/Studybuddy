@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('ALAMAT', 100);
             $table->string('EMAIL', 30);
             $table->string('PASSWORD', 20);
+            $table->boolean('Role');
             $table->timestamps();
         });
     }
