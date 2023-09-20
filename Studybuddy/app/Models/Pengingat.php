@@ -19,7 +19,7 @@ class Pengingat extends Model
 
     public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
+        return $this->belongsTo(Mahasiswa::class, 'users_id');
     }
 
     public function jadwalHarian()

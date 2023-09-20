@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\Mahasiswa;
+use App\Models\Users;
 
 class LoginController extends Controller
 {
@@ -22,10 +23,10 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
+
         return redirect()->route('index')->with('success', 'Anda telah berhasil logout.');
     }
-    
+
 
     public function submitLogin(Request $request)
     {
@@ -34,7 +35,7 @@ class LoginController extends Controller
             'PASSWORD' => 'required|min:5',
         ]);
 
-        $user = Mahasiswa::where('EMAIL', $credentials['EMAIL'])->first();
+        $user = Users::where('EMAIL', $credentials['EMAIL'])->first();
 
         if ($user && Hash::check($credentials['PASSWORD'], $user->PASSWORD)) {
             Auth::login($user);

@@ -9,11 +9,11 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Catatan;
 
 
-class Mahasiswa extends Authenticatable
+class Users extends Authenticatable
 {
     use HasApiTokens, HasFactory;
 
-    protected $table = 'mahasiswa';
+    protected $table = 'users';
     protected $primaryKey = 'id';
     public $timestamps = true;
 
@@ -31,11 +31,11 @@ class Mahasiswa extends Authenticatable
 
     public function catatans()
     {
-        return $this->hasMany(Catatan::class, 'mahasiswa_id');
+        return $this->hasMany(Catatan::class, 'users_id');
     }
 
     public function tugas()
     {
-        return $this->hasMany(Tugas::class, 'mahasiswa_id');
+        return $this->hasMany(Tugas::class, 'users_id');
     }
 }
