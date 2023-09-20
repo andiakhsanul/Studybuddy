@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('ALAMAT', 100);
             $table->string('EMAIL', 30);
             $table->string('PASSWORD', 20);
-            $table->boolean('Role');
+            $table->boolean('Role')->default(0);
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mahasiswa');
+        Schema::dropIfExists('users');
     }
 }

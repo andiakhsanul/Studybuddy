@@ -11,15 +11,15 @@ class Pengingat extends Model
 
     protected $table = 'pengingat';
     protected $fillable = [
-        'mahasiswa_id',
+        'users_id',
         'TANGGAL_PENGINGAT',
         'KETERANGAN',
         'JUDUL_PENGINGAT',
     ];
 
-    public function mahasiswa()
+    public function users()
     {
-        return $this->belongsTo(Mahasiswa::class, 'users_id');
+        return $this->belongsTo(User::class, 'users_id');
     }
 
     public function jadwalHarian()

@@ -41,7 +41,14 @@ class LoginController extends Controller
             Auth::login($user);
             $request->session()->regenerate();
 
-            return redirect()->route('home')->with('success', 'Login berhasil.');
+            if ($user->Role === 0) { // user biasa
+                // Pengguna dengan role 0 (misalnya pengguna biasa) diarahkan ke 'home'
+                return redirect()->route('home')->with('success', 'Login berhasil.');
+
+            } elseif ($user->Role === 1) { // admin website
+                // Pengguna dengan role 1 (misalnya admin) diarahkan ke 'admin.home'
+                // return redirect()->route('admin.home')->with('success', 'Berhasil Login');
+            }
         }
 
         throw ValidationException::withMessages([

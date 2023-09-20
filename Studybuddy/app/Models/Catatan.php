@@ -12,13 +12,15 @@ class Catatan extends Model
     protected $table = 'jadwalharian';
 
     protected $fillable = [
+        'users_id',
+        'kategori_id',
         'hari',
         'kegiatan',
     ];
 
-    public function mahasiswa()
+    public function users()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Users::class);
     }
 
     public function tugas()

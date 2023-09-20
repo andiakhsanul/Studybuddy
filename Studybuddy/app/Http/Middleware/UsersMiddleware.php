@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class MahasiswaMiddleware
+class UsersMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
@@ -17,7 +17,7 @@ class MahasiswaMiddleware
 
         $user = Auth::user();
 
-        if (!$user || !$user instanceof \App\Models\Mahasiswa) {
+        if (!$user || !$user instanceof \App\Models\users) {
             return redirect()->route('index')->with('error', 'Anda harus login sebagai mahasiswa.');
         }
 

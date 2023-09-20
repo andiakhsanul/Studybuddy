@@ -16,6 +16,7 @@ class Tugas extends Model
         'TENGGAT_WAKTU',
         'STATUS',
         'CATATAN',
+        'Skala_Prioritas',
     ];
 
     public function jadwalHarian()
@@ -24,8 +25,8 @@ class Tugas extends Model
     }
 
 
-    public function mahasiswa()
+    public function users()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Users::class);
     }
 }

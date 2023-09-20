@@ -16,7 +16,7 @@ class TugasController extends Controller
             'TENGGAT_WAKTU' => 'required|date',
             'STATUS' => 'required|boolean',
             'jadwalharian_id' => 'required',
-            'mahasiswaId' => 'required',
+            'usersId' => 'required',
         ]);
 
         $user = Auth::user();
@@ -27,12 +27,12 @@ class TugasController extends Controller
             'TENGGAT_WAKTU' => $validatedData['TENGGAT_WAKTU'],
             'STATUS' => $validatedData['STATUS'],
             'jadwalharian_id' => $validatedData['jadwalharian_id'],
-            'mahasiswaId' => $validatedData['mahasiswaId'],
+            'usersId' => $validatedData['usersId'],
         ]);
 
-        // Assign relationships with JadwalHarian and Mahasiswa
+        // Assign relationships with JadwalHarian and Users
         $tugas->jadwalHarian()->associate($validatedData['jadwalharian_id']);
-        $tugas->mahasiswa()->associate($validatedData['mahasiswaId']);
+        $tugas->users()->associate($validatedData['usersId']);
 
         $tugas->save();
 

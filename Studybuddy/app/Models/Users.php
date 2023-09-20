@@ -23,6 +23,7 @@ class Users extends Authenticatable
         'ALAMAT',
         'EMAIL',
         'PASSWORD',
+        'Role',
     ];
 
     protected $hidden = [
