@@ -16,11 +16,12 @@ class CreateTugasTable extends Migration
         Schema::create('tugas', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->foreignId('jadwalharian_id')->references('id')->on('jadwalharian');
-            $table->foreignId('mahasiswa_id')->references('id')->on('mahasiswa');
+            $table->foreignId('users_id')->references('id')->on('users');
             $table->string('DESK_TUGAS', 50);
             $table->dateTime('TENGGAT_WAKTU');
             $table->boolean('STATUS');
             $table->string('CATATAN', 50)->nullable();
+            $table->boolean('Skala_Prioritas');
             $table->timestamps();
         });
     }

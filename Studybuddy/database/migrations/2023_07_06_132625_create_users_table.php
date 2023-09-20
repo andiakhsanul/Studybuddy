@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePengingatTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreatePengingatTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengingat', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreignId('users_id')->references('id')->on('users');
-            $table->dateTime('TANGGAL_PENGINGAT');
-            $table->string('KETERANGAN', 50);
-            $table->string('JUDUL_PENGINGAT', 20);
+            $table->string('NAMA', 30);
+            $table->string('NIS', 15);
+            $table->string('ALAMAT', 100);
+            $table->string('EMAIL', 30);
+            $table->string('PASSWORD', 20);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreatePengingatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengingat');
+        Schema::dropIfExists('mahasiswa');
     }
 }
