@@ -16,28 +16,28 @@
 <h4>Teknologi:</h4>
 <ul>
     <li>
-        <img src="laravel_logo.png" alt="Laravel Logo"> Laravel
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ficonduck.com%2Ficons%2F27594%2Flaravel&psig=AOvVaw1QcG0DH6OgJfP5r2iMZu2Q&ust=1695394600269000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCLD7zZn7u4EDFQAAAAAdAAAAABAQ" alt="Laravel Logo"> Laravel
     </li>
     <li>
-        <img src="php_logo.png" alt="PHP Logo"> PHP
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.flaticon.com%2Ffree-icon%2Fphp_5968332&psig=AOvVaw3QmgRXk3KprvR9deAWKK5N&ust=1695394635223000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMDUwar7u4EDFQAAAAAdAAAAABAE" alt="PHP Logo"> PHP
     </li>
     <li>
-        <img src="javascript_logo.png" alt="JavaScript Logo"> JavaScript
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.flaticon.com%2Ffree-icon%2Fjs_5968292&psig=AOvVaw30ODNshzFlh7vpfk8BhIkK&ust=1695394663475000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIDl07f7u4EDFQAAAAAdAAAAABAE" alt="JavaScript Logo"> JavaScript
     </li>
     <li>
-        <img src="jquery_logo.png" alt="jQuery Logo"> jQuery
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ficonscout.com%2Ffree-logo%2Fjquery-8&psig=AOvVaw2Bq5xiU4NoWGhIKWDhyNRJ&ust=1695394682479000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCOChxMD7u4EDFQAAAAAdAAAAABAE" alt="jQuery Logo"> jQuery
     </li>
     <li>
-        <img src="html_css_logo.png" alt="HTML & CSS Logo"> HTML & CSS
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fkursuswebdesign.org%2Fcara-membuat-icon-bar-menggunakan-html5-dan-css3%2F&psig=AOvVaw3uV_Yr5yfSkS1amT6KtqOo&ust=1695394726478000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCKjq4tX7u4EDFQAAAAAdAAAAABAE" alt="HTML & CSS Logo"> HTML & CSS
     </li>
     <li>
-        <img src="mysql_logo.png" alt="MySQL Logo"> MySQL
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpipedream.com%2Fapps%2Fmysql&psig=AOvVaw10UcJnbVmGdEx6CkGxmTQR&ust=1695394753470000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCNjbkeL7u4EDFQAAAAAdAAAAABAE" alt="MySQL Logo"> MySQL
     </li>
     <li>
-        <img src="ajax_logo.png" alt="AJAX Logo"> AJAX
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hiclipart.com%2Ffree-transparent-background-png-clipart-pvnkj&psig=AOvVaw33JI_74qkGaNUWra3mOo8b&ust=1695394794258000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCPig8_X7u4EDFQAAAAAdAAAAABAE" alt="AJAX Logo"> AJAX
     </li>
     <li>
-        <img src="bootstrap_logo.png" alt="Bootstrap Logo"> Bootstrap
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fgetbootstrap.com%2Fdocs%2F5.0%2Fabout%2Fbrand%2F&psig=AOvVaw1R0P5Iy2rnyG2EP9Lni0gS&ust=1695394815355000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCICV5v_7u4EDFQAAAAAdAAAAABAE" alt="Bootstrap Logo"> Bootstrap
     </li>
 </ul>
 
