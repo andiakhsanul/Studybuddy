@@ -10,38 +10,38 @@
 <h3>Nama Aplikasi: StudyBuddy</h3>
 
 <h4>Deskripsi Aplikasi:</h4>
-<p style="text-align: justify;>
+<p>
     Aplikasi ini adalah sebuah website yang dirancang khusus untuk membantu siswa dalam mengatur dan mengelola jadwal harian mereka dengan mudah. Dengan fitur-fitur yang disediakan, pengguna dapat dengan cepat mencatat dan merencanakan aktivitas sehari-hari, termasuk tugas-tugas sekolah yang harus diselesaikan. Selain itu, aplikasi ini juga memungkinkan pengguna untuk menyimpan catatan penting yang dapat diakses kapan saja, sehingga membantu siswa dalam mengorganisir informasi yang diperlukan untuk pendidikan mereka. Dengan aplikasi ini, siswa dapat menjadi lebih teratur, efisien, dan siap menghadapi tugas-tugas sekolah mereka.
 </p>
 
 <h4>Teknologi:</h4>
 <ul>
     <li>
-        <i class="bi bi-bootstrap"></i> Bootstrap
+        Laravel
     </li>
     <li>
-        <i class="bi bi-laravel"></i> Laravel
+        PHP
     </li>
     <li>
-        <i class="bi bi-php"></i> PHP
+        JavaScript
     </li>
     <li>
-        <i class="bi bi-javascript"></i> JavaScript
+        JQuery
     </li>
     <li>
-        <i class="bi bi-jquery"></i> jQuery
+        HTML
     </li>
     <li>
-        <i class="bi bi-html5"></i> HTML
+        CSS
     </li>
     <li>
-        <i class="bi bi-css3"></i> CSS
+        MySQL
     </li>
     <li>
-        <i class="bi bi-mysql"></i> MySQL
+        Ajax
     </li>
     <li>
-        <i class="bi bi-ajax"></i> AJAX
+        Bootstrap
     </li>
 </ul>
 
@@ -52,6 +52,3 @@
 </ol>
 </body>
 </html>
-
-
-
