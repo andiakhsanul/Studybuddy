@@ -1,11 +1,8 @@
-# Studybuddy
 <!DOCTYPE html>
 <html>
 <head>
-    <title>StudyBuddy - Sistem Informasi Pencatatan dan Pengelolaan Jadwal Harian</title>
 </head>
 <body>
-
 <h1>StudyBuddy</h1>
 <h2>Tema: Pendidikan</h2>
 <h3>Judul Project: StudyBuddy (Sistem Informasi Pencatatan dan Pengelolaan Jadwal Harian)</h3>
