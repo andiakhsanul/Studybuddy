@@ -18,16 +18,16 @@
                     <div id="isiContentSection" style="display: none;">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">Form Catatan Harian</h5>
+                                <h5 class="card-title">Buat Catatan Harian</h5>
                                 <form action="{{ route('storeCatatan') }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="hari" class="form-label">Hari:</label>
+                                        <label for="hari" class="form-label">Hari :</label>
                                         <input type="date" name="hari" id="hari" class="form-control" required>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="kegiatan" class="form-label">Kegiatan:</label>
+                                        <label for="kegiatan" class="form-label">Judul Catatan :</label>
                                         <input type="text" name="kegiatan" id="kegiatan" class="form-control" required>
                                     </div>
 
@@ -274,8 +274,7 @@
                 card.show();
             });
         });
-    </script>
-    <script>
+
         // script untuk menambahkan form tugas
         $(document).ready(function() {
             let formCounter = 0;

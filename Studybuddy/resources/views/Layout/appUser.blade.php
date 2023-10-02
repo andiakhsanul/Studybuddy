@@ -26,8 +26,8 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
 
-
-    {{-- <script src="{{ asset('JS/script.js') }}"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 </body>
 
 </html>
