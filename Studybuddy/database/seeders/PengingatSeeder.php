@@ -17,17 +17,7 @@ class PengingatSeeder extends Seeder
      */
     public function run()
     {
-        // Get the Mahasiswa ID for the foreign key reference
-        $mahasiswaId = Mahasiswa::first()->id;
 
-        Pengingat::create([
-            'mahasiswa_id' => $mahasiswaId,
-            'TANGGAL_PENGINGAT' => now(),
-            'KETERANGAN' => 'Meeting',
-            'JUDUL_PENGINGAT' => 'Reminder',
-        ]);
-
-        // You can add more Pengingat records here if needed
     }
 }
 

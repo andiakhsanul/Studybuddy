@@ -322,7 +322,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="jadwalharian_id" value="${catatanId}">
-                    <input type="hidden" name="mahasiswaId" value="{{ $mahasiswaId }}">
+                    <input type="hidden" name="usersId" value="{{ $usersId }}">
                 </form>
             `;
 
@@ -431,7 +431,7 @@
                 if (tugasId === null) {
                     // Handle case where tugasId is not defined or the user has no tasks
                     console.log('Tugas ID is not defined');
-                    
+
                     return;
                 }
 

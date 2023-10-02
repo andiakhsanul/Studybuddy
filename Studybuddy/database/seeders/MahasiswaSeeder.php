@@ -16,14 +16,6 @@ class MahasiswaSeeder extends Seeder
      */
     public function run()
     {
-        Mahasiswa::create([
-            'NAMA' => 'John Doe',
-            'NIS' => '123456789',
-            'ALAMAT' => '123 Street, City',
-            'EMAIL' => 'john@example.com',
-            'PASSWORD' => bcrypt('password'),
-        ]);
 
-        // You can add more Mahasiswa records here if needed
     }
 }

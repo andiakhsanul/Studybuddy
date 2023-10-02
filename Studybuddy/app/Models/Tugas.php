@@ -12,7 +12,7 @@ class Tugas extends Model
 
     protected $fillable = [
         'jadwalharian_id',
-        'mahasiswa_id',
+        'users_id',
         'DESK_TUGAS',
         'TENGGAT_WAKTU',
         'STATUS',

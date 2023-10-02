@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Mahasiswa;
+use App\Models\Users;
 
 class HomeController extends Controller
 {
@@ -13,8 +14,8 @@ class HomeController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            $namaUser = Mahasiswa::where('NAMA', $user->NAMA)->value('NAMA');
-            $idUser = Mahasiswa::where('id', $user->id)->value('id');
+            $namaUser = Users::where('NAMA', $user->NAMA)->value('NAMA');
+            $idUser = Users::where('id', $user->id)->value('id');
 
             $jadwalharian = $user->catatans;
             $tugas = $user->tugas; // Retrieve the jadwalharian records associated with the user
@@ -22,7 +23,7 @@ class HomeController extends Controller
             return view('pages.users.home', [
                 'title' => 'Home',
                 'namaUser' => $namaUser,
-                'mahasiswaId' => $idUser,
+                'usersId' => $idUser,
                 'jadwalharian' => $jadwalharian,
                 'tugas' => $tugas,  // Pass the jadwalharian variable to the view
             ]);

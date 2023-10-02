@@ -27,13 +27,13 @@ use Illuminate\Support\Facades\Route;
 // fix routes
 Route::get('/register/view', [RegisterController::class, 'index'])->name('registerForms');
 
-Route::get('/', [LoginController::class, 'index'])->name('index');   
+Route::get('/', [LoginController::class, 'index'])->name('index');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/submitLogin', [LoginController::class, 'submitLogin'])->name('submitLogin');
 
-Route::group(['middleware' => 'mahasiswa'], function () {
+Route::group(['middleware' => 'users'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('/notifikasi');
 });
