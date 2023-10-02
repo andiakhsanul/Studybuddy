@@ -6,7 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Catatan;
-use App\Models\Mahasiswa;
+
 
 class JadwalHarianSeeder extends Seeder
 {
@@ -17,16 +17,7 @@ class JadwalHarianSeeder extends Seeder
      */
     public function run()
     {
-        // Get the Mahasiswa ID for the foreign key reference
-        $mahasiswaId = Mahasiswa::first()->id;
 
-        Catatan::create([
-            'mahasiswa_id' => $mahasiswaId,
-            'HARI' => now(),
-            'KEGIATAN' => 'Study',
-        ]);
-
-        // You can add more JadwalHarian records here if needed
     }
 }
 

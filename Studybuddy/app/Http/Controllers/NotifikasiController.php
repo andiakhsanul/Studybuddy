@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengingat;
-use App\Models\Mahasiswa;
 use App\Models\Users;
 use Illuminate\Http\Request;
 
