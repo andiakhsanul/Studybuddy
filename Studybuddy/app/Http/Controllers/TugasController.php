@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tugas;
+use App\Models\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 

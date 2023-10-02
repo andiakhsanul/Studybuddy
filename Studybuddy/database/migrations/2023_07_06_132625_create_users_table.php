@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('NIS', 15);
             $table->string('ALAMAT', 100);
             $table->string('EMAIL', 30);
-            $table->string('PASSWORD', 20);
+            $table->string('PASSWORD', 255);
             $table->boolean('Role')->default(0);
             $table->timestamps();
         });
