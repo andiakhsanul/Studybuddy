@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CatatanController;
+use App\Http\Controllers\Homeadmincontroller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\RegisterController;
@@ -36,6 +37,7 @@ Route::post('/submitLogin', [LoginController::class, 'submitLogin'])->name('subm
 Route::group(['middleware' => 'users'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('/notifikasi');
+    route::get('/homeadmin',[Homeadmincontroller::class,'index'])->name('adminhome');
 });
 Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
 
