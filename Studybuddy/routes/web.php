@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\CatatanController;
-use App\Http\Controllers\Homeadmincontroller;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\NotifikasiController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\TugasController;
-use App\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TugasController;
+use App\Http\Controllers\CatatanController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\NotifikasiController;
 
 // Route::get('/', function () {
 //     return view('pages.Index.login', [
@@ -37,7 +37,7 @@ Route::post('/submitLogin', [LoginController::class, 'submitLogin'])->name('subm
 Route::group(['middleware' => 'users'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('/notifikasi');
-    route::get('/homeadmin',[Homeadmincontroller::class,'index'])->name('adminhome');
+
 });
 Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
 
@@ -55,3 +55,5 @@ Route::delete('/deleteTugas/{id}', [TugasController::class, 'delete'])->name('de
 
 Route::get('/register/view', [RegisterController::class, 'index'])->name('registerForms');
 Route::post('/register/data', [RegisterController::class, 'submitRegister'])->name('submitRegister');
+
+Route:: get('/admin',[AdminController::class, 'index'])->name('adminPage');
