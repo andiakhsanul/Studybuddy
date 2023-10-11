@@ -30,10 +30,6 @@
     justify-content: center;
 }
 
-/* .center-content img {
-    margin-right: 10px;
-} */
-
 .center-content i {
     color: #709085;
 }
@@ -59,7 +55,39 @@
     font-size: 1.2rem;
 }
 
-/* sidebar Home User */
+/* Isi Konten dari Menu home */
+.btn-success.btn-hover {
+    background-color: #28a745;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-success.btn-hover:hover {
+    background-color: transparent;
+    color: #28a745;
+    border: 1px solid #28a745;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-social {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    color: #0d6efd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-social:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Sidebar Home User */
 .sidebar {
     background-color: #f8f9fa;
     height: 100vh;
@@ -86,12 +114,12 @@
 
 .nav-link.active {
     background-color: white !important;
-    color: blue !important;
+    color: #0d6efd !important;
 }
 
 .nav-link:hover {
     background-color: white !important;
-    color: blue !important;
+    color: #0d6efd !important;
 }
 
 .nav-link.btn-danger {
@@ -119,22 +147,61 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Footer user */
-footer {
-    height: 50px;
-    background-color: #0d6efd;
-    padding: 10px 0;
-    border-top: 1px solid black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0;
+/* Page Login dan Page Registrasi */
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
 }
 
-footer p {
-    color: white;
-    margin: 0;
-    font-size: 14px;
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-container a {
+    text-align: right;
+}
+
+.btn-custom {
+    font-size: 1.2rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-content i {
+    color: #709085;
+}
+
+.center-content h1 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.my-3.center-content {
+    padding-bottom: 20px;
+}
+
+.dividers:after,
+.dividers:before {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: #eee;
+}
+
+.btnr-custom {
+    font-size: 1.2rem;
 }
 
 .btn-social {
@@ -154,3 +221,18 @@ footer p {
     background-color: #0d6efd;
     color: white;
 }
+
+
+
+    .container-fluid {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Set tinggi minimum container sampai tinggi viewport */
+    }
+
+    .main-content {
+        flex-grow: 1; /* Konten utama mengisi sisa tinggi container */
+        overflow-y: auto; /* Tambahkan overflow jika konten melebihi tinggi viewport */
+    }
+
+

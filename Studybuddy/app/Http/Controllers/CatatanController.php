@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Catatan;
 use App\Models\Tugas;
 use App\Models\Users;
+use App\Models\Kategori;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -16,11 +17,13 @@ class CatatanController extends Controller
         $validatedData = $request->validate([
             'hari' => 'required|date',
             'kegiatan' => 'required|string|max:255',
+            'kategori' => 'required|exists:kategori,id', // Pastikan kategori ada dalam tabel kategori
         ]);
 
         $catatan = Auth::user()->catatans()->create([
             'hari' => $validatedData['hari'],
             'kegiatan' => $validatedData['kegiatan'],
+            'kategori_id' => $validatedData['kategori'], // Isi foreign key kategori_id
         ]);
 
         $catatan->save();
@@ -58,5 +61,37 @@ class CatatanController extends Controller
 
         // Redirect ke halaman yang sesuai setelah mengupdate catatan
         return redirect()->route('home')->with('success', 'Catatan harian berhasil diperbarui.');
+    }
+
+    public function filterCatatan(Request $request)
+    {
+        $user = Auth::user();
+        $namaUser = Users::where('NAMA', $user->NAMA)->value('NAMA');
+        $idUser = Users::where('id', $user->id)->value('id');
+
+        $kategoriFilter = $request->input('kategoriFilter');
+        $prioritasFilter = $request->input('prioritasFilter');
+
+        $jadwalharian = Catatan::where('users_id', $idUser)
+            ->when($kategoriFilter, function ($query) use ($kategoriFilter) {
+                return $query->where('kategori_id', $kategoriFilter);
+            })
+            ->when($prioritasFilter, function ($query) use ($prioritasFilter) {
+                return $query->where('prioritas', $prioritasFilter);
+            })
+            ->get();
+
+        $tugas = $user->tugas;
+
+        $kategoris = Kategori::all();
+
+        return view('pages.users.home', [
+            'title' => 'Home',
+            'namaUser' => $namaUser,
+            'usersId' => $idUser,
+            'jadwalharian' => $jadwalharian,
+            'tugas' => $tugas,
+            'kategoris' => $kategoris,
+        ]);
     }
 }

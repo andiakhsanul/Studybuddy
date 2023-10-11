@@ -57,3 +57,5 @@ Route::get('/register/view', [RegisterController::class, 'index'])->name('regist
 Route::post('/register/data', [RegisterController::class, 'submitRegister'])->name('submitRegister');
 
 Route:: get('/admin',[AdminController::class, 'index'])->name('adminPage');
+
+Route::post('/filterCatatan', 'CatatanController@filter')->name('filterCatatan');

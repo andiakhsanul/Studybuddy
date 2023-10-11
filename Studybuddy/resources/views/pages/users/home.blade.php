@@ -7,6 +7,38 @@
                 <div class="card-header text-center bg-primary">
                     <h4 class="text-white">Catatan Harian {{ $namaUser }}</h4>
                 </div>
+                {{-- Filter Catatan User --}}
+                <div class="card-body">
+                    <h5 class="card-title">Search Catatan :</h5>
+                    <form action="{{ route('filterCatatan') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="kategoriFilter" class="form-label">Kategori :</label>
+                                    <select name="kategoriFilter" id="kategoriFilter" class="form-select">
+                                        <option value="" selected>Semua Kategori</option>
+                                        @foreach ($kategoris as $kategori)
+                                            <option value="{{ $kategori->id }}">{{ $kategori->Nama_Kategori }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="prioritasFilter" class="form-label">Prioritas :</label>
+                                    <select name="prioritasFilter" id="prioritasFilter" class="form-select">
+                                        <option value="" selected>Semua Prioritas</option>
+                                        <option value="rendah">Rendah</option>
+                                        <option value="sedang">Sedang</option>
+                                        <option value="tinggi">Tinggi</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Terapkan Filter</button>
+                    </form>
+                </div>
+
                 <div class="card-body">
                     <h5 class="card-title">List Catatan :</h5>
                     <hr>
@@ -31,13 +63,22 @@
                                         <input type="text" name="kegiatan" id="kegiatan" class="form-control" required>
                                     </div>
 
+                                    <div class="mb-3">
+                                        <label for="kategori" class="form-label">Kategori :</label>
+                                        <select name="kategori" id="kategori" class="form-select" required>
+                                            <option value="" selected disabled>Pilih Kategori</option>
+                                            @foreach ($kategoris as $kategori)
+                                                <option value="{{ $kategori->id }}">{{ $kategori->Nama_Kategori }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                     <button type="submit" class="btn btn-primary">Simpan</button>
-
                                 </form>
-
                             </div>
                         </div>
                     </div>
+
 
                     {{-- Menampilkan Form catatan dan tugas --}}
                     <div class="row pt-4">
@@ -48,14 +89,17 @@
                                         <div class="card-body d-flex align-items-center gap-1">
                                             <div class="flex-grow-1 tugas-item">
                                                 {{-- Menampilkan Catatan --}}
-                                                <h5 class="card-text">{{ $catatan->KEGIATAN }} - {{ $catatan->HARI }}</h5>
-                                                <p class="card-title">{{ $catatan->created_at }}</p>
+                                                @php
+                                                    $formattedDate = \Carbon\Carbon::parse($catatan->HARI)->isoFormat('dddd, D MMMM YYYY', 'Do MMMM YYYY', 'id');
+                                                @endphp
+                                                <h5 class="card-text">{{ $catatan->KEGIATAN }}<span><h6 class="card-text">{{ $formattedDate }}</h6> </span></h5>
                                                 @foreach ($tugas as $tugass)
                                                     @if ($tugass->jadwalharian_id == $catatan->id)
                                                         {{-- Menampilkan Tugas --}}
                                                         <div class="tugas-item" data-tugas-id="{{ $tugass->id }}">
                                                             <p class="deskripsi-tugas">
-                                                                {{ $tugass->jadwalharian_id }} | {{ $tugass->DESK_TUGAS }} |
+                                                                {{ $tugass->jadwalharian_id }} | {{ $tugass->DESK_TUGAS }}
+                                                                |
                                                                 {{ $tugass->TENGGAT_WAKTU }} |
                                                                 @if ($tugass->STATUS == 1)
                                                                     {{ 'selesai' }}
@@ -103,7 +147,8 @@
                                                 @method('PUT')
                                                 <div class="mb-3">
                                                     <label for="hari" class="form-label">Hari:</label>
-                                                    <input type="date" name="hari" id="hari" class="form-control"
+                                                    <input type="date" name="hari" id="hari"
+                                                        class="form-control"
                                                         value="{{ $date = explode(' ', $catatan->HARI)[0] }}" required>
                                                 </div>
                                                 <div class="mb-3">
@@ -425,7 +470,7 @@
                 let form = $('#editForm');
                 let data = form.serialize();
                 let tugasId =
-                '{{ $tugass->id ?? null }}'; // Use null as default if $tugass->id is not defined
+                    '{{ $tugass->id ?? null }}'; // Use null as default if $tugass->id is not defined
 
                 if (tugasId === null) {
                     // Handle case where tugasId is not defined or the user has no tasks

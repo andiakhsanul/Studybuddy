@@ -28,4 +28,9 @@ class Catatan extends Model
     {
         return $this->hasMany(Tugas::class, 'jadwalharian_id', 'id');
     }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 }

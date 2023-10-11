@@ -1,5 +1,3 @@
-<div class="container-fluid">
-    <div class="row d-flex">
         <div class="col-2 sidebar bg-primary flex-grow-0">
             <div class="d-flex align-items-center justify-content-center mt-3 mb-4">
                 <img src="images/logoTitle/logoweb.png" alt="Logo" width="40" height="40" class="mr-2"
@@ -24,9 +22,3 @@
                 </li>
             </ul>
         </div>
-        <div class="col-10 main-content flex-grow-1">
-            <div id="notificationContainer"></div>
-            @yield('content')
-        </div>
-    </div>
-</div>
