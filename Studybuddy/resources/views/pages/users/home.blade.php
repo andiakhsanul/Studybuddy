@@ -84,7 +84,7 @@
                     <div class="row pt-4">
                         @foreach ($jadwalharian as $catatan)
                             <div class="col-md-6 mb-3" data-catatan-id="{{ $catatan->id }}">
-                                <div class="card p-2 bg-primary">
+                                <div class="card p-1 bg-primary">
                                     <div class="card">
                                         <div class="card-body d-flex align-items-center gap-1">
                                             <div class="flex-grow-1 tugas-item">
@@ -92,14 +92,47 @@
                                                 @php
                                                     $formattedDate = \Carbon\Carbon::parse($catatan->HARI)->isoFormat('dddd, D MMMM YYYY', 'Do MMMM YYYY', 'id');
                                                 @endphp
-                                                <h5 class="card-text">{{ $catatan->KEGIATAN }}<span><h6 class="card-text">{{ $formattedDate }}</h6> </span></h5>
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <h5 class="card-text">{{ $catatan->KEGIATAN }}<span>
+                                                                <h6 class="card-text">{{ $formattedDate }}</h6>
+                                                            </span></h5>
+                                                        <div class="mt-2 d-flex align-items-center">
+                                                            <label for="kategoriSelect" class="mb-0">Kategori:</label>
+                                                            <select name="kategoriSelect" class="form-select"
+                                                                data-catatan-id="{{ $catatan->id }}">
+                                                                <option value="" selected>Pilih Kategori</option>
+                                                                @foreach ($kategoris as $kategori)
+                                                                    <option value="{{ $kategori->id }}"
+                                                                        {{ $kategori->id == $catatan->kategori_id ? 'selected' : '' }}>
+                                                                        {{ $kategori->Nama_Kategori }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button class="btn btn-primary btn-hover btn-edit" type="button"
+                                                            data-catatan-id="{{ $catatan->id }}">
+                                                            <i class="bx bx-pencil"></i>
+                                                        </button>
+                                                        <button class="buatListTugasButton btn btn-success btn-hover"
+                                                            type="button" data-catatan-id="{{ $catatan->id }}">
+                                                            <i class="bx bx-plus"></i>
+                                                        </button>
+                                                        <button class="btn btn-danger btn-hover btn-delete" type="button"
+                                                            data-catatan-id="{{ $catatan->id }}">
+                                                            <i class="bx bx-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <hr class="hr-blue" style="border-color: blue;">
                                                 @foreach ($tugas as $tugass)
                                                     @if ($tugass->jadwalharian_id == $catatan->id)
                                                         {{-- Menampilkan Tugas --}}
                                                         <div class="tugas-item" data-tugas-id="{{ $tugass->id }}">
                                                             <p class="deskripsi-tugas">
                                                                 {{ $tugass->jadwalharian_id }} | {{ $tugass->DESK_TUGAS }}
-                                                                |
                                                                 {{ $tugass->TENGGAT_WAKTU }} |
                                                                 @if ($tugass->STATUS == 1)
                                                                     {{ 'selesai' }}
@@ -116,24 +149,6 @@
                                                         </div>
                                                     @endif
                                                 @endforeach
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-primary btn-hover btn-edit" type="button"
-                                                    data-catatan-id="{{ $catatan->id }}">
-                                                    <i class="bx bx-pencil"></i>
-                                                </button>
-                                            </div>
-                                            <div>
-                                                <button class="buatListTugasButton btn btn-success btn-hover" type="button"
-                                                    data-catatan-id="{{ $catatan->id }}">
-                                                    <i class="bx bx-plus"></i>
-                                                </button>
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-danger btn-hover btn-delete" type="button"
-                                                    data-catatan-id="{{ $catatan->id }}">
-                                                    <i class="bx bx-trash"></i>
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -268,6 +283,29 @@
                 }
 
                 form.slideToggle();
+            });
+        });
+
+        // Update kategori pada catatan
+        $('select[name="kategoriSelect"]').change(function() {
+            let catatanId = $(this).data('catatan-id');
+            let kategoriId = $(this).val();
+            let updateKategoriUrl = "{{ route('updateKategori', ':id') }}".replace(':id', catatanId);
+
+            $.ajax({
+                url: updateKategoriUrl,
+                type: 'PUT',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    kategori_id: kategoriId
+                },
+                success: function(response) {
+                    showNotification(response.message, 'success');
+                },
+                error: function(xhr) {
+                    console.log(xhr);
+                    showNotification('Terjadi kesalahan saat mengupdate kategori.', 'danger');
+                }
             });
         });
 

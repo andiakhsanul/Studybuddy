@@ -53,9 +53,15 @@ Route::put('/tugas/{id}', [TugasController::class, 'update'])->name('updateTugas
 Route::delete('/deleteCatatan/{id}', [CatatanController::class, 'destroy'])->name('deleteCatatan');
 Route::delete('/deleteTugas/{id}', [TugasController::class, 'delete'])->name('deleteTugas');
 
+//update kategori catatan// Di dalam routes/web.php
+Route::put('/update-kategori/{id}', 'CatatanController@updateKategori')->name('updateKategori');
+
+//route register user
 Route::get('/register/view', [RegisterController::class, 'index'])->name('registerForms');
 Route::post('/register/data', [RegisterController::class, 'submitRegister'])->name('submitRegister');
 
 Route:: get('/admin',[AdminController::class, 'index'])->name('adminPage');
 
 Route::post('/filterCatatan', 'CatatanController@filter')->name('filterCatatan');
+
+
