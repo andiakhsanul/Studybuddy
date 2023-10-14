@@ -11,12 +11,17 @@ class NotifikasiController extends Controller
     public function index()
     {
         $pengingat = Pengingat::with('jadwalHarian')->get();
-        $mahasiswa = Users::first(); // Ambil data mahasiswa yang sesuai, atau sesuaikan dengan logika bisnis Anda
+        $mahasiswa = Users::first(); // ngammbil data mahasiswa yang sesuai
 
         return view('pages.users.notifikasi', [
             'title' => 'Notifikasi',
             'pengingat' => $pengingat,
-            'namaUser' => $mahasiswa->NAMA // Tambahkan data namaUser ke dalam array yang dikirim ke view
+            'namaUser' => $mahasiswa->NAMA // Tambahkan data namaUser ke dalam array yang akan dikirim ke view
         ]);
+    }
+
+    public function notofication()
+    {
+
     }
 }

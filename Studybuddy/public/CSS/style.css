@@ -222,17 +222,47 @@
     color: white;
 }
 
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Set tinggi minimum container sampai tinggi viewport */
+}
 
+.main-content {
+    flex-grow: 1; /* Konten utama mengisi sisa tinggi container */
+    overflow-y: auto; /* Tambahkan overflow jika konten melebihi tinggi viewport */
+}
 
-    .container-fluid {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh; /* Set tinggi minimum container sampai tinggi viewport */
-    }
+/* Mengubah ukuran dropdown (select) */
+select[name="kategoriSelect"] {
+    width: 150px; /* Sesuaikan lebar dropdown sesuai preferensi Anda */
+    padding: 5px; /* Sesuaikan jarak antara border dan teks sesuai preferensi Anda */
+    font-size: 12px; /* Sesuaikan ukuran teks sesuai preferensi Anda */
+}
 
-    .main-content {
-        flex-grow: 1; /* Konten utama mengisi sisa tinggi container */
-        overflow-y: auto; /* Tambahkan overflow jika konten melebihi tinggi viewport */
-    }
+/* Mengubah ukuran option */
+select[name="kategoriSelect"] option {
+    font-size: 12px; /* Sesuaikan ukuran teks dalam option sesuai preferensi Anda */
+}
 
+/* Mengatur margin kanan pada label "Kategori" */
+label[for="kategoriSelect"] {
+    margin-right: 10px; /* Sesuaikan nilai margin kanan sesuai preferensi Anda */
+}
 
+.informasi-tambahan {
+    font-size: 12px; /* Sesuaikan ukuran font sesuai preferensi Anda */
+}
+
+.deskripsi-tugas {
+    margin-bottom: 3px; /* Sesuaikan dengan ukuran yang Anda inginkan */
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Jarak antara tombol */
+}
+
+.btn-sm {
+    padding: 4px 6px; /* Sesuaikan dengan ukuran yang Anda inginkan */
+}

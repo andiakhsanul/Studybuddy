@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tugas;
+use App\Models\Catatan;
 use App\Models\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class TugasController extends Controller
             'DESK_TUGAS' => 'required|string|max:255',
             'TENGGAT_WAKTU' => 'required|date',
             'STATUS' => 'required|boolean',
+            'Skala_Prioritas'=> 'required|boolean',
             'jadwalharian_id' => 'required',
             'usersId' => 'required',
         ]);
@@ -27,6 +29,7 @@ class TugasController extends Controller
             'DESK_TUGAS' => $validatedData['DESK_TUGAS'],
             'TENGGAT_WAKTU' => $validatedData['TENGGAT_WAKTU'],
             'STATUS' => $validatedData['STATUS'],
+            'Skala_Prioritas'=> $validatedData['Skala_Prioritas'],
             'jadwalharian_id' => $validatedData['jadwalharian_id'],
             'usersId' => $validatedData['usersId'],
         ]);

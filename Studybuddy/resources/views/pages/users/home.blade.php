@@ -9,27 +9,35 @@
                 </div>
                 {{-- Filter Catatan User --}}
                 <div class="card-body">
-                    <h5 class="card-title">Search Catatan :</h5>
+                    <h5 class="card-title text-primary">Search Catatan :</h5>
                     <form action="{{ route('filterCatatan') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <label for="kategoriFilter" class="form-label">Kategori :</label>
-                                    <select name="kategoriFilter" id="kategoriFilter" class="form-select">
+                                <div class="col-md-4">
+                                    <label for="kategoriFilter" class="form-label text-primary">Kategori :</label>
+                                    <select name="kategoriFilter" id="kategoriFilter" class="form-select text-primary">
                                         <option value="" selected>Semua Kategori</option>
                                         @foreach ($kategoris as $kategori)
                                             <option value="{{ $kategori->id }}">{{ $kategori->Nama_Kategori }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="prioritasFilter" class="form-label">Prioritas :</label>
-                                    <select name="prioritasFilter" id="prioritasFilter" class="form-select">
-                                        <option value="" selected>Semua Prioritas</option>
-                                        <option value="rendah">Rendah</option>
-                                        <option value="sedang">Sedang</option>
-                                        <option value="tinggi">Tinggi</option>
+                                <div class="col-md-4">
+                                    <label for="prioritasFilter" class="form-label text-primary">Prioritas Tugas:</label>
+                                    <select name="prioritasFilter" id="prioritasFilter" class="form-select text-primary">
+                                        <option value="" class="text-primary" selected>Semua Prioritas</option>
+                                        <option value="rendah" class="text-primary">Rendah</option>
+                                        <option value="sedang" class="text-primary">Sedang</option>
+                                        <option value="tinggi" class="text-primary">Tinggi</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="statusFilter" class="form-label text-primary">Status Tugas :</label>
+                                    <select name="statusFilter" id="statusFilter" class="form-select text-primary">
+                                        <option value="" class="text-primary" selected>Semua Status</option>
+                                        <option value="selesai" class="text-primary">Selesai</option>
+                                        <option value="belum selesai" class="text-primary">Belum Selesai</option>
                                     </select>
                                 </div>
                             </div>
@@ -40,7 +48,7 @@
                 </div>
 
                 <div class="card-body">
-                    <h5 class="card-title">List Catatan :</h5>
+                    <h5 class="card-title text-primary">List Catatan :</h5>
                     <hr>
                     <button id="buatCatatanButton" class="btn btn-success btn-hover mb-4" type="button">
                         <i class="bx bx-plus"></i> Buat Catatan
@@ -53,24 +61,29 @@
                                 <h5 class="card-title">Buat Catatan Harian</h5>
                                 <form action="{{ route('storeCatatan') }}" method="POST">
                                     @csrf
-                                    <div class="mb-3">
-                                        <label for="hari" class="form-label">Hari :</label>
-                                        <input type="date" name="hari" id="hari" class="form-control" required>
-                                    </div>
 
                                     <div class="mb-3">
                                         <label for="kegiatan" class="form-label">Judul Catatan :</label>
                                         <input type="text" name="kegiatan" id="kegiatan" class="form-control" required>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Kategori :</label>
-                                        <select name="kategori" id="kategori" class="form-select" required>
-                                            <option value="" selected disabled>Pilih Kategori</option>
-                                            @foreach ($kategoris as $kategori)
-                                                <option value="{{ $kategori->id }}">{{ $kategori->Nama_Kategori }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="hari" class="form-label">Hari :</label>
+                                            <input type="date" name="hari" id="hari" class="form-control"
+                                                required>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="kategori" class="form-label">Kategori :</label>
+                                            <select name="kategori" id="kategori" class="form-select" required>
+                                                <option value="" selected disabled>Pilih Kategori</option>
+                                                @foreach ($kategoris as $kategori)
+                                                    <option value="{{ $kategori->id }}">{{ $kategori->Nama_Kategori }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -84,7 +97,7 @@
                     <div class="row pt-4">
                         @foreach ($jadwalharian as $catatan)
                             <div class="col-md-6 mb-3" data-catatan-id="{{ $catatan->id }}">
-                                <div class="card p-2 bg-primary">
+                                <div class="card p-1 bg-primary">
                                     <div class="card">
                                         <div class="card-body d-flex align-items-center gap-1">
                                             <div class="flex-grow-1 tugas-item">
@@ -92,48 +105,82 @@
                                                 @php
                                                     $formattedDate = \Carbon\Carbon::parse($catatan->HARI)->isoFormat('dddd, D MMMM YYYY', 'Do MMMM YYYY', 'id');
                                                 @endphp
-                                                <h5 class="card-text">{{ $catatan->KEGIATAN }}<span><h6 class="card-text">{{ $formattedDate }}</h6> </span></h5>
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <h5 class="card-text text-primary">{{ $catatan->KEGIATAN }}<span
+                                                                class=" text-black">
+                                                                <h6 class="card-text">{{ $formattedDate }}</h6>
+                                                            </span></h5>
+                                                        <div class="mt-2 d-flex align-items-center">
+                                                            <label for="kategoriSelect" class="mb-0">Kategori :</label>
+                                                            <select name="kategoriSelect" class="form-select"
+                                                                data-catatan-id="{{ $catatan->id }}">
+                                                                <option value="" selected>Pilih Kategori</option>
+                                                                @foreach ($kategoris as $kategori)
+                                                                    <option value="{{ $kategori->id }}"
+                                                                        {{ $kategori->id == $catatan->kategori_id ? 'selected' : '' }}>
+                                                                        {{ $kategori->Nama_Kategori }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button class="btn btn-primary btn-hover btn-edit" type="button"
+                                                            data-catatan-id="{{ $catatan->id }}">
+                                                            <i class="bx bx-pencil"></i>
+                                                        </button>
+                                                        <button class="buatListTugasButton btn btn-success btn-hover"
+                                                            type="button" data-catatan-id="{{ $catatan->id }}">
+                                                            <i class="bx bx-plus"></i>
+                                                        </button>
+                                                        <button class="btn btn-danger btn-hover btn-delete" type="button"
+                                                            data-catatan-id="{{ $catatan->id }}">
+                                                            <i class="bx bx-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <hr class="hr-blue" style="border-color: blue;">
                                                 @foreach ($tugas as $tugass)
                                                     @if ($tugass->jadwalharian_id == $catatan->id)
                                                         {{-- Menampilkan Tugas --}}
                                                         <div class="tugas-item" data-tugas-id="{{ $tugass->id }}">
-                                                            <p class="deskripsi-tugas">
-                                                                {{ $tugass->jadwalharian_id }} | {{ $tugass->DESK_TUGAS }}
-                                                                |
-                                                                {{ $tugass->TENGGAT_WAKTU }} |
-                                                                @if ($tugass->STATUS == 1)
-                                                                    {{ 'selesai' }}
-                                                                @else
-                                                                    {{ 'belum selesai' }}
-                                                                @endif
+                                                            <div class="d-flex justify-content-between">
+                                                                <p class="deskripsi-tugas">
+                                                                    Tugas {{ $loop->iteration }} |
+                                                                    {{ $tugass->DESK_TUGAS }}
+                                                                </p>
+                                                                <div class="button-container">
+                                                                    <button
+                                                                        class="btn btn-warning btn-sm btn-hover btn-edit-tugas"
+                                                                        type="button"
+                                                                        data-tugas-id="{{ $tugass->id }}">Edit</button>
+                                                                    <button
+                                                                        class="btn btn-danger btn-sm btn-hover btn-delete-tugas"
+                                                                        type="button"
+                                                                        data-tugas-id="{{ $tugass->id }}">Hapus</button>
+                                                                </div>
+                                                            </div>
+                                                            <p class="informasi-tambahan">
+                                                                <span class="tanggal">
+                                                                    {{ date('l, j n Y H:i', strtotime($tugass->TENGGAT_WAKTU)) }}
+                                                                    |
+                                                                </span>
+                                                                <span class="status">
+                                                                    @if ($tugass->STATUS == 1)
+                                                                        {{ 'selesai' }}
+                                                                    @else
+                                                                        {{ 'belum selesai' }}
+                                                                    @endif |
+                                                                </span>
+                                                                <span class="skala-prioritas">
+                                                                    Skala Prioritas:
+                                                                    {{ $tugass->Skala_Prioritas == 1 ? 'Penting' : 'Tidak Penting' }}
+                                                                </span>
                                                             </p>
-                                                            <button class="btn btn-warning btn-hover btn-edit-tugas"
-                                                                type="button"
-                                                                data-tugas-id="{{ $tugass->id }}">Edit</button>
-                                                            <button class="btn btn-danger btn-hover btn-delete-tugas"
-                                                                type="button"
-                                                                data-tugas-id="{{ $tugass->id }}">Hapus</button>
                                                         </div>
                                                     @endif
                                                 @endforeach
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-primary btn-hover btn-edit" type="button"
-                                                    data-catatan-id="{{ $catatan->id }}">
-                                                    <i class="bx bx-pencil"></i>
-                                                </button>
-                                            </div>
-                                            <div>
-                                                <button class="buatListTugasButton btn btn-success btn-hover" type="button"
-                                                    data-catatan-id="{{ $catatan->id }}">
-                                                    <i class="bx bx-plus"></i>
-                                                </button>
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-danger btn-hover btn-delete" type="button"
-                                                    data-catatan-id="{{ $catatan->id }}">
-                                                    <i class="bx bx-trash"></i>
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -246,6 +293,470 @@
             </div>
         </div>
     </div>
+
+    {{-- Versi Statiknya --}}
+    <div class="row pt-4">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-header text-center bg-primary">
+                    <h4 class="text-white">Catatan Harian John Doe</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Search Catatan :</h5>
+                    <form action="/filterCatatan" method="POST">
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="kategoriFilter" class="form-label text-primary">Kategori :</label>
+                                    <select name="kategoriFilter" id="kategoriFilter" class="form-select text-primary">
+                                        <option value="" selected>Semua Kategori</option>
+                                        <option value="1">Kategori 1</option>
+                                        <option value="2">Kategori 2</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="prioritasFilter" class="form-label text-primary">Prioritas Tugas:</label>
+                                    <select name="prioritasFilter" id="prioritasFilter" class="form-select">
+                                        <option value="" selected>Semua Prioritas</option>
+                                        <option value="rendah">Rendah</option>
+                                        <option value="sedang">Sedang</option>
+                                        <option value="tinggi">Tinggi</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="statusFilter" class="form-label text-primary">Status Tugas :</label>
+                                    <select name="statusFilter" id="statusFilter" class="form-select">
+                                        <option value="" selected>Semua Status</option>
+                                        <option value="selesai">Selesai</option>
+                                        <option value="belum selesai">Belum Selesai</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Terapkan Filter</button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">List Catatan :</h5>
+                    <hr>
+                    <button id="buatCatatanButton" class="btn btn-success btn-hover mb-4" type="button">
+                        <i class="bx bx-plus"></i> Buat Catatan
+                    </button>
+                    <div id="isiContentSection" style="display: none;">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Buat Catatan Harian</h5>
+                                <form action="/storeCatatan" method="POST">
+                                    <div class="mb-3">
+                                        <label for="kegiatan" class="form-label">Judul Catatan :</label>
+                                        <input type="text" name="kegiatan" id="kegiatan" class="form-control"
+                                            required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="hari" class="form-label">Hari :</label>
+                                            <input type="date" name="hari" id="hari" class="form-control"
+                                                required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="kategori" class="form-label">Kategori :</label>
+                                            <select name="kategori" id="kategori" class="form-select" required>
+                                                <option value="" selected disabled>Pilih Kategori</option>
+                                                <option value="1">Kategori 1</option>
+                                                <option value="2">Kategori 2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pt-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="card p-1 bg-primary">
+                                <div class="card">
+                                    <div class="card-body d-flex align-items-center gap-1">
+                                        <div class="flex-grow-1 tugas-item">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h5 class="card-text">Sample Task 1
+                                                        <span>
+                                                            <h6 class="card-text">Monday, 25 October 2023</h6>
+                                                        </span>
+                                                    </h5>
+                                                    <div class="mt-2 d-flex align-items-center">
+                                                        <label for="kategoriSelect" class="mb-0">Kategori :</label>
+                                                        <select name="kategoriSelect" class="form-select">
+                                                            <option value="" selected>Pilih Kategori</option>
+                                                            <option value="1">Kategori 1</option>
+                                                            <option value="2">Kategori 2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-primary btn-hover btn-edit" type="button">
+                                                        <i class="bx bx-pencil"></i>
+                                                    </button>
+                                                    <button class="buatListTugasButton btn btn-success btn-hover"
+                                                        type="button">
+                                                        <i class="bx bx-plus"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-hover btn-delete" type="button">
+                                                        <i class="bx bx-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <hr class="hr-blue" style="border-color: blue;">
+                                            <div class="tugas-item" data-tugas-id="1">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="deskripsi-tugas">Tugas 1 | Sample Task 1</p>
+                                                    <div class="button-container">
+                                                        <button class="btn btn-warning btn-sm btn-hover btn-edit-tugas"
+                                                            type="button">Edit</button>
+                                                        <button class="btn btn-danger btn-sm btn-hover btn-delete-tugas"
+                                                            type="button">Hapus</button>
+                                                    </div>
+                                                </div>
+                                                <p class="informasi-tambahan">
+                                                    <span class="tanggal">
+                                                        Monday, 25 October 2023 12:00 |
+                                                    </span>
+                                                    <span class="status">
+                                                        Status: belum selesai
+                                                    </span>
+                                                    <span class="skala-prioritas">
+                                                        | Skala Prioritas: Penting
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="tugas-item" data-tugas-id="1">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="deskripsi-tugas">Tugas 1 | Sample Task 1</p>
+                                                    <div class="button-container">
+                                                        <button class="btn btn-warning btn-sm btn-hover btn-edit-tugas"
+                                                            type="button">Edit</button>
+                                                        <button class="btn btn-danger btn-sm btn-hover btn-delete-tugas"
+                                                            type="button">Hapus</button>
+                                                    </div>
+                                                </div>
+                                                <p class="informasi-tambahan">
+                                                    <span class="tanggal">
+                                                        Monday, 25 October 2023 12:00 |
+                                                    </span>
+                                                    <span class="status">
+                                                        Status: belum selesai
+                                                    </span>
+                                                    <span class="skala-prioritas">
+                                                        | Skala Prioritas: Penting
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="card mt-4" style="display: none;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Form Edit Catatan Harian</h5>
+                                                    <form action="/updateCatatan/1" method="POST">
+                                                        <div class="mb-3">
+                                                            <label for="hari" class="form-label">Hari:</label>
+                                                            <input type="date" name="hari" id="hari"
+                                                                class="form-control" value="2023-10-25" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="kegiatan" class="form-label">Kegiatan:</label>
+                                                            <input type="text" name="kegiatan" id="kegiatan"
+                                                                class="form-control" value="Sample Task 1" required>
+                                                        </div>
+                                                        <div class="row mt-4">
+                                                            <div class="col-md-12">
+                                                                <div class="d-flex justify-content-center gap-2 ">
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Simpan</button>
+                                                                    <button type="button"
+                                                                        class="btn btn-danger btn-cancel-edit">Batal
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div id="addTugas" style="display: none;">
+                                                <div class="card mt-4">
+                                                    <div class="card-body">
+                                                        <form action="/storeTugas" method="POST">
+                                                            <div id="tugasRow"></div>
+                                                            <div class="row mt-4">
+                                                                <div class="col-md-12">
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <button type="button"
+                                                                            class="submit-button btn btn-primary"
+                                                                            value="submit"
+                                                                            id="submitAllForms">Simpan</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card mt-3" style="display: none;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Form Edit Tugas</h5>
+                                                    <form id="editForm" class="dynamic-form">
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-12">
+                                                                <div
+                                                                    class="mb-3 d-flex justify-content-between align-items-center">
+                                                                    <label for="DESK_TUGAS" class="form-label">Deskripsi
+                                                                        Tugas:</label>
+                                                                </div>
+                                                                <textarea name="DESK_TUGAS" class="form-control" required></textarea>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="TENGGAT_WAKTU" class="form-label">Waktu
+                                                                        Pengumpulan:</label>
+                                                                    <input type="datetime-local" name="TENGGAT_WAKTU"
+                                                                        class="form-control" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="STATUS" class="form-label">Status
+                                                                        Tugas:</label>
+                                                                    <select name="STATUS" class="form-control" required>
+                                                                        <option value="0">Belum Selesai</option>
+                                                                        <option value="1">Selesai</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-4">
+                                                            <div class="col-md-12">
+                                                                <div class="d-flex justify-content-center gap-2">
+                                                                    <button type="button"
+                                                                        class="submit-button btn btn-primary"
+                                                                        id="submitAllForms">Simpan</button>
+                                                                    <button type="button"
+                                                                        class="btn btn-danger btn-cancel-edit">Batal</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <div class="card p-1 bg-primary">
+                                <div class="card">
+                                    <div class="card-body d-flex align-items-center gap-1">
+                                        <div class="flex-grow-1 tugas-item">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h5 class="card-text">Sample Task 1
+                                                        <span>
+                                                            <h6 class="card-text">Monday, 25 October 2023</h6>
+                                                        </span>
+                                                    </h5>
+                                                    <div class="mt-2 d-flex align-items-center">
+                                                        <label for="kategoriSelect" class="mb-0">Kategori :</label>
+                                                        <select name="kategoriSelect" class="form-select">
+                                                            <option value="" selected>Pilih Kategori</option>
+                                                            <option value="1">Kategori 1</option>
+                                                            <option value="2">Kategori 2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-primary btn-hover btn-edit" type="button">
+                                                        <i class="bx bx-pencil"></i>
+                                                    </button>
+                                                    <button class="buatListTugasButton btn btn-success btn-hover"
+                                                        type="button">
+                                                        <i class="bx bx-plus"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-hover btn-delete" type="button">
+                                                        <i class="bx bx-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <hr class="hr-blue" style="border-color: blue;">
+                                            <div class="tugas-item" data-tugas-id="1">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="deskripsi-tugas">Tugas 1 | Sample Task 1</p>
+                                                    <div class="button-container">
+                                                        <button class="btn btn-warning btn-sm btn-hover btn-edit-tugas"
+                                                            type="button">Edit</button>
+                                                        <button class="btn btn-danger btn-sm btn-hover btn-delete-tugas"
+                                                            type="button">Hapus</button>
+                                                    </div>
+                                                </div>
+                                                <p class="informasi-tambahan">
+                                                    <span class="tanggal">
+                                                        Monday, 25 October 2023 12:00 |
+                                                    </span>
+                                                    <span class="status">
+                                                        Status: belum selesai
+                                                    </span>
+                                                    <span class="skala-prioritas">
+                                                        | Skala Prioritas: Penting
+                                                    </span>
+                                                </p>
+                                            </div>
+
+                                            <div class="tugas-item" data-tugas-id="1">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="deskripsi-tugas">Tugas 1 | Sample Task 1</p>
+                                                    <div class="button-container">
+                                                        <button class="btn btn-warning btn-sm btn-hover btn-edit-tugas"
+                                                            type="button">Edit</button>
+                                                        <button class="btn btn-danger btn-sm btn-hover btn-delete-tugas"
+                                                            type="button">Hapus</button>
+                                                    </div>
+                                                </div>
+                                                <p class="informasi-tambahan">
+                                                    <span class="tanggal">
+                                                        Monday, 25 October 2023 12:00 |
+                                                    </span>
+                                                    <span class="status">
+                                                        Status: belum selesai
+                                                    </span>
+                                                    <span class="skala-prioritas">
+                                                        | Skala Prioritas: Penting
+                                                    </span>
+                                                </p>
+                                            </div>
+
+                                            <div class="tugas-item" data-tugas-id="1">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="deskripsi-tugas">Tugas 1 | Sample Task 1</p>
+                                                    <div class="button-container">
+                                                        <button class="btn btn-warning btn-sm btn-hover btn-edit-tugas"
+                                                            type="button">Edit</button>
+                                                        <button class="btn btn-danger btn-sm btn-hover btn-delete-tugas"
+                                                            type="button">Hapus</button>
+                                                    </div>
+                                                </div>
+                                                <p class="informasi-tambahan">
+                                                    <span class="tanggal">
+                                                        Monday, 25 October 2023 12:00 |
+                                                    </span>
+                                                    <span class="status">
+                                                        Status: belum selesai
+                                                    </span>
+                                                    <span class="skala-prioritas">
+                                                        | Skala Prioritas: Penting
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="card mt-4" style="display: none;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Form Edit Catatan Harian</h5>
+                                                    <form action="/updateCatatan/1" method="POST">
+                                                        <div class="mb-3">
+                                                            <label for="hari" class="form-label">Hari:</label>
+                                                            <input type="date" name="hari" id="hari"
+                                                                class="form-control" value="2023-10-25" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="kegiatan" class="form-label">Kegiatan:</label>
+                                                            <input type="text" name="kegiatan" id="kegiatan"
+                                                                class="form-control" value="Sample Task 1" required>
+                                                        </div>
+                                                        <div class="row mt-4">
+                                                            <div class="col-md-12">
+                                                                <div class="d-flex justify-content-center gap-2 ">
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Simpan</button>
+                                                                    <button type="button"
+                                                                        class="btn btn-danger btn-cancel-edit">Batal
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div id="addTugas" style="display: none;">
+                                                <div class="card mt-4">
+                                                    <div class="card-body">
+                                                        <form action="/storeTugas" method="POST">
+                                                            <div id="tugasRow"></div>
+                                                            <div class="row mt-4">
+                                                                <div class="col-md-12">
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <button type="button"
+                                                                            class="submit-button btn btn-primary"
+                                                                            value="submit"
+                                                                            id="submitAllForms">Simpan</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card mt-3" style="display: none;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Form Edit Tugas</h5>
+                                                    <form id="editForm" class="dynamic-form">
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-12">
+                                                                <div
+                                                                    class="mb-3 d-flex justify-content-between align-items-center">
+                                                                    <label for="DESK_TUGAS" class="form-label">Deskripsi
+                                                                        Tugas:</label>
+                                                                </div>
+                                                                <textarea name="DESK_TUGAS" class="form-control" required></textarea>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="TENGGAT_WAKTU" class="form-label">Waktu
+                                                                        Pengumpulan:</label>
+                                                                    <input type="datetime-local" name="TENGGAT_WAKTU"
+                                                                        class="form-control" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="STATUS" class="form-label">Status
+                                                                        Tugas:</label>
+                                                                    <select name="STATUS" class="form-control" required>
+                                                                        <option value="0">Belum Selesai</option>
+                                                                        <option value="1">Selesai</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-4">
+                                                            <div class="col-md-12">
+                                                                <div class="d-flex justify-content-center gap-2">
+                                                                    <button type="button"
+                                                                        class="submit-button btn btn-primary"
+                                                                        id="submitAllForms">Simpan</button>
+                                                                    <button type="button"
+                                                                        class="btn btn-danger btn-cancel-edit">Batal</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -270,6 +781,33 @@
                 form.slideToggle();
             });
         });
+
+        // Update kategori pada
+        $(document).ready(function() {
+            $('select[name="kategoriSelect"]').change(function() {
+                let catatanId = $(this).data('catatan-id');
+                let kategoriId = $(this).val();
+                let updateKategoriUrl = "{{ route('updateKategori', ':id') }}".replace(':id', catatanId);
+
+                $.ajax({
+                    url: updateKategoriUrl,
+                    type: 'PUT',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        kategori_id: kategoriId
+                    },
+                    success: function(response) {
+                        showNotification(response.message, 'success');
+                    },
+                    error: function(xhr) {
+                        console.log(xhr);
+                        showNotification('Terjadi kesalahan saat mengupdate kategori.',
+                            'danger');
+                    }
+                });
+            });
+        });
+
 
         // script untuk menghapus catatan dan tugas
         $(document).ready(function() {
@@ -344,10 +882,10 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="mb-3 d-flex justify-content-between align-items-center">
-                                <label for="DESK_TUGAS" class="form-label">Deskripsi Tugas:</label>
+                                <label for="DESK_TUGAS" class="form-label">Nama Tugas :</label>
                                 <button class="hapusTugasButton btn btn-danger ml-2" type="button" data-catatan-id="${catatanId}">Hapus</button>
                             </div>
-                            <textarea name="DESK_TUGAS" class="form-control" required></textarea>
+                            <input name="DESK_TUGAS" class="form-control" required></input>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
@@ -364,9 +902,18 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="Skala_Prioritas" class="form-label">Skala Prioritas:</label>
+                                <select name="Skala_Prioritas" class="form-control" required>
+                                    <option value="0">Tidak Penting</option>
+                                    <option value="1">Penting</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <input type="hidden" name="jadwalharian_id" value="${catatanId}">
-                    <input type="hidden" name="usersId" value="{{ $usersId }}">
+                    <input type="hidden" name="mahasiswaId" value="{{ $usersId }}">
                 </form>
             `;
 

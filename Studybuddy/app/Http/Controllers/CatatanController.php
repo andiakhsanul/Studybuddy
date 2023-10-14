@@ -94,4 +94,19 @@ class CatatanController extends Controller
             'kategoris' => $kategoris,
         ]);
     }
+
+    public function updateKategori(Request $request, $id)
+    {
+        $catatan = Catatan::find($id);
+        $kategoriId = $request->input('kategori_id');
+
+        if (!$catatan) {
+            return response()->json(['message' => 'Catatan tidak ditemukan'], 404);
+        }
+
+        $catatan->kategori_id = $kategoriId;
+        $catatan->save();
+
+        return response()->json(['message' => 'Kategori catatan berhasil diperbarui'], 200);
+    }
 }
