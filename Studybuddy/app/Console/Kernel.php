@@ -12,24 +12,43 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      */
-    protected function schedule(Schedule $schedule): void
+    protected function schedule(Schedule $schedule)
     {
-        // Pengecekan dan pembuatan pengingat setiap 5 menit
-        $schedule->call(function () {
-            $now = now();
-            $deadlineTime = now()->addMinutes(10);
+        $now = now();
+        $deadlineTimePrioritasTinggi = $now->copy()->addMinutes(30);
+        $deadlineTimePrioritasRendah = $now->copy()->addMinutes(15);
 
-            // Ambil tugas yang tenggat waktunya sudah mendekati 10 menit dari sekarang
-            $tugas = Tugas::where('TENGGAT_WAKTU', '>=', $now)
-                ->where('TENGGAT_WAKTU', '<=', $deadlineTime)
-                ->whereDoesntHave('pengingat') // Pastikan tugas belum memiliki pengingat
+        // Notifikasi untuk tugas dengan skala prioritas tinggi
+        $schedule->call(function () use ($deadlineTimePrioritasTinggi) {
+            // Ambil tugas dengan skala prioritas tinggi dan tenggat waktu mendekati 30 menit
+            $tugas = Tugas::where('skala_prioritas', 1)
+                ->where('TENGGAT_WAKTU', '>=', now())
+                ->where('TENGGAT_WAKTU', '<=', $deadlineTimePrioritasTinggi)
                 ->get();
-                dd($tugas);
-            // Buat pengingat untuk setiap tugas yang memenuhi syarat
+
+            // Buat pengingat untuk tugas-tugas ini
             foreach ($tugas as $tugasItem) {
                 $pengingat = new Pengingat();
-                $pengingat->mahasiswa_id = $tugasItem->mahasiswa_id;
-                $pengingat->jadwalharian_id = $tugasItem->jadwalharian_id;
+                $pengingat->users_id = $tugasItem->users_id;
+                $pengingat->TANGGAL_PENGINGAT = $tugasItem->TENGGAT_WAKTU;
+                $pengingat->KETERANGAN = 'Pengingat tugas: ' . $tugasItem->DESK_TUGAS;
+                $pengingat->JUDUL_PENGINGAT = 'Tugas';
+                $pengingat->save();
+            }
+        })->everyFiveMinutes();
+
+        // Notifikasi untuk tugas dengan skala prioritas rendah
+        $schedule->call(function () use ($deadlineTimePrioritasRendah) {
+            // Ambil tugas dengan skala prioritas rendah dan tenggat waktu mendekati 15 menit
+            $tugas = Tugas::where('skala_prioritas', 0)
+                ->where('TENGGAT_WAKTU', '>=', now())
+                ->where('TENGGAT_WAKTU', '<=', $deadlineTimePrioritasRendah)
+                ->get();
+
+            // Buat pengingat untuk tugas-tugas ini
+            foreach ($tugas as $tugasItem) {
+                $pengingat = new Pengingat();
+                $pengingat->users_id = $tugasItem->users_id;
                 $pengingat->TANGGAL_PENGINGAT = $tugasItem->TENGGAT_WAKTU;
                 $pengingat->KETERANGAN = 'Pengingat tugas: ' . $tugasItem->DESK_TUGAS;
                 $pengingat->JUDUL_PENGINGAT = 'Tugas';

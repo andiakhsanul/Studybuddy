@@ -30,6 +30,9 @@ class CreatePengingatTable extends Migration
      */
     public function down()
     {
+        Schema::table('tugas', function (Blueprint $table) {
+            $table->boolean('skala_prioritas')->default(0); // Default value 0 untuk Tugas Sampingan
+        });
         Schema::dropIfExists('pengingat');
     }
 }
