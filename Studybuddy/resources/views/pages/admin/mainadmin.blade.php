@@ -3,7 +3,7 @@
 @section('content')
 
 <main>
-    
+
     <h1>Analytics</h1>
     <!-- Analyses -->
     <div class="analyse">
@@ -87,23 +87,7 @@
     <!-- End of New Users Section -->
 
     <!-- Recent Orders Table -->
-    <div class="recent-orders">
-        <h2>Recent Orders</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Course Name</th>
-                    <th>Course Number</th>
-                    <th>Payment</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <a href="#">Show All</a>
-    </div>
-    <!-- End of Recent Orders -->
+
 
 </main>
 <!-- End of Main Content -->
