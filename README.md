@@ -47,7 +47,7 @@
 
 <h4>Anggota Kelompok Project:</h4>
 <ol>
-    <li>Muhamad Ghandi Nur Setaiwan (434221014)</li>
+    <li>Muhamad Ghandi Nur Setiawan (434221014)</li>
     <li>Andi Akhsanul (434221022)</li>
 </ol>
 </body>
