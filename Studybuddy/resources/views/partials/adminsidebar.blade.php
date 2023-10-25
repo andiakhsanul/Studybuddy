@@ -3,7 +3,7 @@
     <aside>
         <div class="toggle">
             <div class="logo">
-                <img src="images/logo.png">
+                <img src="images/logoTitle/logoweb.png">
                 <h2>Study<span class="danger">Buddy</span></h2>
             </div>
             <div class="close" id="close-btn">

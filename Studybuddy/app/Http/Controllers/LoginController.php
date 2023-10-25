@@ -46,7 +46,7 @@ class LoginController extends Controller
 
             } elseif ($user->Role === 1) { // admin website
                 // Pengguna dengan role 1 (misalnya admin) diarahkan ke 'admin.home'
-                // return redirect()->route('admin.home')->with('success', 'Berhasil Login');
+                return redirect()->route('adminPage')->with('success', 'Berhasil Login');
             }
         }
 

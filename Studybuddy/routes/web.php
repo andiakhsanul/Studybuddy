@@ -34,10 +34,11 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/submitLogin', [LoginController::class, 'submitLogin'])->name('submitLogin');
 
+
 Route::group(['middleware' => 'users'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('/notifikasi');
-
+    Route:: get('/admin',[AdminController::class, 'index'])->name('adminPage');
 });
 Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
 
@@ -60,7 +61,7 @@ Route::put('/update-kategori/{id}', 'CatatanController@updateKategori')->name('u
 Route::get('/register/view', [RegisterController::class, 'index'])->name('registerForms');
 Route::post('/register/data', [RegisterController::class, 'submitRegister'])->name('submitRegister');
 
-Route:: get('/admin',[AdminController::class, 'index'])->name('adminPage');
+
 
 Route::post('/filterCatatan', 'CatatanController@filter')->name('filterCatatan');
 
