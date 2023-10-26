@@ -10,15 +10,15 @@
         <div class="sales">
             <div class="status">
                 <div class="info">
-                    <h3>Total Sales</h3>
-                    <h1>$65,024</h1>
+                    <h3></h3>users
+                    <h1>700</h1>
                 </div>
                 <div class="progresss">
                     <svg>
                         <circle cx="38" cy="38" r="36"></circle>
                     </svg>
                     <div class="percentage">
-                        <p>+81%</p>
+                        <p>+81</p>
                     </div>
                 </div>
             </div>
@@ -26,15 +26,15 @@
         <div class="visits">
             <div class="status">
                 <div class="info">
-                    <h3>Site Visit</h3>
-                    <h1>24,981</h1>
+                    <h3>Tugas</h3>
+                    <h1>300</h1>
                 </div>
                 <div class="progresss">
                     <svg>
                         <circle cx="38" cy="38" r="36"></circle>
                     </svg>
                     <div class="percentage">
-                        <p>-48%</p>
+                        <p>+40</p>
                     </div>
                 </div>
             </div>
@@ -42,16 +42,16 @@
         <div class="searches">
             <div class="status">
                 <div class="info">
-                    <h3>Searches</h3>
-                    <h1>14,147</h1>
+                    <h3>kategori</h3>
+                    <h1>5   </h1>
                 </div>
                 <div class="progresss">
                     <svg>
                         <circle cx="38" cy="38" r="36"></circle>
                     </svg>
-                    <div class="percentage">
+                    {{-- <div class="percentage">
                         <p>+21%</p>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
