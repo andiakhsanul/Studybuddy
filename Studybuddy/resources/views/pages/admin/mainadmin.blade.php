@@ -111,11 +111,11 @@
 
         <div class="profile">
             <div class="info">
-                <p>Hey, <b>Reza</b></p>
+                <p>Hey, <b>{{ $namaUser }}</b></p>
                 <small class="text-muted">Admin</small>
             </div>
             <div class="profile-photo">
-                <img src="images/profile-1.jpg">
+                <img src="images/logoTitle/logoweb.png">
             </div>
         </div>
 
@@ -124,9 +124,9 @@
 
     <div class="user-profile">
         <div class="logo">
-            <img src="images/logo.png">
-            <h2>AsmrProg</h2>
-            <p>Fullstack Web Developer</p>
+            <img src="images/logoTitle/logo.png">
+            <h2>hai {{ $namaUser }} </h2>
+            <p>ADMIN</p>
         </div>
     </div>
 

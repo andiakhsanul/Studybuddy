@@ -69,7 +69,7 @@
                 </span>
                 <h3>New Login</h3>
             </a>
-            <a href="#">
+            <a href="{{ route('logout') }}">
                 <span class="material-icons-sharp">
                     logout
                 </span>
