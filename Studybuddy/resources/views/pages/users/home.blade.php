@@ -295,7 +295,7 @@
     </div>
 
     {{-- Versi Statiknya --}}
-    <div class="row pt-4">
+    {{-- <div class="row pt-4">
         <div class="col">
             <div class="card mb-3">
                 <div class="card-header text-center bg-primary">
@@ -756,7 +756,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @section('scripts')
