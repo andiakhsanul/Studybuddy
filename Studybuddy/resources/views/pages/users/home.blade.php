@@ -808,7 +808,6 @@
             });
         });
 
-
         // script untuk menghapus catatan dan tugas
         $(document).ready(function() {
             $(document).on('click', '.btn-delete', function() {
