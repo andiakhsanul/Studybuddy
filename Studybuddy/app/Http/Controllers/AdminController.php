@@ -17,4 +17,15 @@ class AdminController extends Controller
             'namaUser' => $namaUser,
         ]);
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('index')->with('success', 'Anda telah berhasil logout.');
+    }
+
+
 }
