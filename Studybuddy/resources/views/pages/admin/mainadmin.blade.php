@@ -11,14 +11,14 @@
             <div class="status">
                 <div class="info">
                     <h3></h3>users
-                    <h1>700</h1>
+                    <h1>{{ $userCount }}</h1>
                 </div>
                 <div class="progresss">
                     <svg>
-                        <circle cx="38" cy="38" r="36"></circle>
+                        <circle cx="38" cy="38" r="36" style="stroke-dasharray: {{ $userCount * 20 }} 200;"></circle>
                     </svg>
                     <div class="percentage">
-                        <p>+81</p>
+                        <p>+{{ $userCount * 2 }}</p>
                     </div>
                 </div>
             </div>
@@ -27,14 +27,14 @@
             <div class="status">
                 <div class="info">
                     <h3>Tugas</h3>
-                    <h1>300</h1>
+                    <h1>{{ $tugasCount }}</h1>
                 </div>
                 <div class="progresss">
                     <svg>
-                        <circle cx="38" cy="38" r="36"></circle>
+                        <circle cx="38" cy="38" r="36" style="stroke-dasharray: {{ $tugasCount * 20 }} 200;"></circle>
                     </svg>
                     <div class="percentage">
-                        <p>+40</p>
+                        <p>+{{ $tugasCount * 2 }}</p>
                     </div>
                 </div>
             </div>
@@ -42,16 +42,16 @@
         <div class="searches">
             <div class="status">
                 <div class="info">
-                    <h3>kategori</h3>
-                    <h1>5   </h1>
+                    <h3>Tugas kategori</h3>
+                    <h1>{{ $kategoriCount }}</h1>
                 </div>
                 <div class="progresss">
                     <svg>
-                        <circle cx="38" cy="38" r="36"></circle>
+                        <circle cx="38" cy="38" r="36" style="stroke-dasharray: {{ $kategoriCount * 20 }} 200;"></circle>
                     </svg>
-                    {{-- <div class="percentage">
-                        <p>+21%</p>
-                    </div> --}}
+                    <div class="percentage">
+                        <p>+{{ $kategoriCount * 2 }}</p>
+                    </div>
                 </div>
             </div>
         </div>
