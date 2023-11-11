@@ -33,12 +33,11 @@
                 <h3>Tugas</h3>
                 <span class="message-count">27</span>
             </a>
-            <a href="#" class="active">
+            <a href="{{ route('adminPage') }}" class="{{ Request::is('admin*') ? 'active' : '' }}">
                 <span class="material-icons-sharp">
                     insights
                 </span>
                 <h3>Analytics</h3>
-
             </a>
             <a href="#">
                 <span class="material-icons-sharp">
@@ -53,12 +52,6 @@
                 </span>
                 <h3>Kategori</h3>
                 <span class="message-count">27</span>
-            </a>
-            {{-- <a href="#">
-                <span class="material-icons-sharp">
-                    report_gmailerrorred
-                </span>
-                <h3>Reports</h3> --}}
             </a>
             <a href="{{ route('logout') }}">
                 <span class="material-icons-sharp">

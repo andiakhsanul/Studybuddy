@@ -1,99 +1,80 @@
 @extends('Layout.appadmin')
 
 @section('content')
+    <main>
 
-<main>
-
-    <h1>Analytics</h1>
-    <!-- Analyses -->
-    <div class="analyse">
-        <div class="sales">
-            <div class="status">
-                <div class="info">
-                    <h3></h3>users
-                    <h1>{{ $userCount }}</h1>
+        <h1>Analytics</h1>
+        <!-- Analyses -->
+        <div class="analyse">
+            <div class="sales">
+                <div class="status">
+                    <div class="info">
+                        <h3></h3>users
+                        <h1>{{ $userCount }}</h1>
+                    </div>
+                    <div class="progresss">
+                        <svg>
+                            <circle cx="38" cy="38" r="36" style="stroke-dasharray: {{ $userCount * 20 }} 200;">
+                            </circle>
+                        </svg>
+                        <div class="percentage">
+                            <p>+{{ $userCount * 2 }}</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="progresss">
-                    <svg>
-                        <circle cx="38" cy="38" r="36" style="stroke-dasharray: {{ $userCount * 20 }} 200;"></circle>
-                    </svg>
-                    <div class="percentage">
-                        <p>+{{ $userCount * 2 }}</p>
+            </div>
+            <div class="visits">
+                <div class="status">
+                    <div class="info">
+                        <h3>Tugas</h3>
+                        <h1>{{ $tugasCount }}</h1>
+                    </div>
+                    <div class="progresss">
+                        <svg>
+                            <circle cx="38" cy="38" r="36"
+                                style="stroke-dasharray: {{ $tugasCount * 20 }} 200;"></circle>
+                        </svg>
+                        <div class="percentage">
+                            <p>+{{ $tugasCount * 2 }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="searches">
+                <div class="status">
+                    <div class="info">
+                        <h3>Tugas kategori</h3>
+                        <h1>{{ $kategoriCount }}</h1>
+                    </div>
+                    <div class="progresss">
+                        <svg>
+                            <circle cx="38" cy="38" r="36"
+                                style="stroke-dasharray: {{ $kategoriCount * 20 }} 200;"></circle>
+                        </svg>
+                        <div class="percentage">
+                            <p>+{{ $kategoriCount * 2 }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="visits">
-            <div class="status">
-                <div class="info">
-                    <h3>Tugas</h3>
-                    <h1>{{ $tugasCount }}</h1>
-                </div>
-                <div class="progresss">
-                    <svg>
-                        <circle cx="38" cy="38" r="36" style="stroke-dasharray: {{ $tugasCount * 20 }} 200;"></circle>
-                    </svg>
-                    <div class="percentage">
-                        <p>+{{ $tugasCount * 2 }}</p>
+        <!-- End of Analyses -->
+
+        <!-- New Users Section -->
+        <div class="new-users">
+            <h2>New Users</h2>
+            <div class="user-list">
+                @foreach($allUsers as $user)
+                    <div class="user">
+                        <h2>{{ $user->NAMA }}</h2>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
-        <div class="searches">
-            <div class="status">
-                <div class="info">
-                    <h3>Tugas kategori</h3>
-                    <h1>{{ $kategoriCount }}</h1>
-                </div>
-                <div class="progresss">
-                    <svg>
-                        <circle cx="38" cy="38" r="36" style="stroke-dasharray: {{ $kategoriCount * 20 }} 200;"></circle>
-                    </svg>
-                    <div class="percentage">
-                        <p>+{{ $kategoriCount * 2 }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End of Analyses -->
+    </main>
 
-    <!-- New Users Section -->
-    <div class="new-users">
-        <h2>New Users</h2>
-        <div class="user-list">
-            <div class="user">
-                <img src="images/profile-2.jpg">
-                <h2>Jack</h2>
-                <p>54 Min Ago</p>
-            </div>
-            <div class="user">
-                <img src="images/profile-3.jpg">
-                <h2>Amir</h2>
-                <p>3 Hours Ago</p>
-            </div>
-            <div class="user">
-                <img src="images/profile-4.jpg">
-                <h2>Ember</h2>
-                <p>6 Hours Ago</p>
-            </div>
-            <div class="user">
-                <img src="images/plus.png">
-                <h2>More</h2>
-                <p>New User</p>
-            </div>
-        </div>
-    </div>
-    <!-- End of New Users Section -->
-
-    <!-- Recent Orders Table -->
-
-
-</main>
-<!-- End of Main Content -->
-
-<!-- Right Section -->
-<div class="right-section">
+     <!-- Right Section -->
+ <div class="right-section">
     <div class="nav">
         <button id="menu-btn">
             <span class="material-icons-sharp">
@@ -189,10 +170,11 @@
 
 </div>
 
-</div>
 
-<script src="orders.js"></script>
-<script src="js/admin.js"></script>
 
+
+    </div>
+
+    <script src="orders.js"></script>
+    <script src="js/admin.js"></script>
 @endsection
-

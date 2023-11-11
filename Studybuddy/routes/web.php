@@ -38,7 +38,7 @@ Route::post('/submitLogin', [LoginController::class, 'submitLogin'])->name('subm
 Route::group(['middleware' => 'users'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('/notifikasi');
-    Route:: get('/admin',[AdminController::class, 'index'])->name('adminPage');
+    Route:: get('admin',[AdminController::class, 'index'])->name('adminPage');
 });
 Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
 
@@ -64,5 +64,8 @@ Route::post('/register/data', [RegisterController::class, 'submitRegister'])->na
 
 
 Route::post('/filterCatatan', 'CatatanController@filter')->name('filterCatatan');
+
+//route to get tugas for admin
+Route::get('/tugas', [TugasController::class, 'index'])->name('tugas');
 
 
