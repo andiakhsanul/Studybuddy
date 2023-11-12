@@ -11,7 +11,7 @@
                         href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn-success border text-white rounded {{ $title === 'notifikasi' ? 'active' : '' }}"
+                    <a class="nav-link btn-success border text-white rounded {{ Request ::is('notifikasi*') ? 'active' : '' }}"
                         href="{{ route('notifikasi') }}">Notifikasi</a>
                 </li>
             </ul>

@@ -37,7 +37,16 @@ class AdminController extends Controller
         return redirect()->route('index')->with('success', 'Anda telah berhasil logout.');
     }
 
-    //make to get data tugas from database and show it to admin with query builde
+    public function indexuserall(){
+        $user = Auth::user();
+        $namaUser = DB::table('users')->where('NAMA', $user->NAMA)->value('NAMA');
+        $users = DB::table('users')->get();
+        return view('pages.Admin.usersadmin', [
+            'title' => 'User',
+            'namaUser' => $namaUser,
+            'users' => $users
+        ]);
+    }
 
 
 
