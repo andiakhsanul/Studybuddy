@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tugas;
-use App\Models\Catatan;
 use App\Models\Users;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Catatan;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TugasController extends Controller
 {

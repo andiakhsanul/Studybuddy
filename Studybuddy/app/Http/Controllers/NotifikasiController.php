@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengingat;
 use App\Models\Users;
+use App\Models\Pengingat;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class NotifikasiController extends Controller
 {

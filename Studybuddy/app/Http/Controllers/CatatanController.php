@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Catatan;
 use App\Models\Tugas;
 use App\Models\Users;
+use App\Models\Catatan;
 use App\Models\Kategori;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CatatanController extends Controller
 {
