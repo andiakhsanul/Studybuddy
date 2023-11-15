@@ -51,6 +51,7 @@ class CatatanController extends Controller
         $validatedData = $request->validate([
             'hari' => 'required|date',
             'kegiatan' => 'required|string|max:255',
+            'kategori' => 'required',
         ]);
 
         $catatan = Catatan::findOrFail($id); // Mengambil data catatan berdasarkan ID
@@ -58,11 +59,13 @@ class CatatanController extends Controller
         // Memperbarui data catatan dengan data yang baru
         $catatan->hari = $validatedData['hari'];
         $catatan->kegiatan = $validatedData['kegiatan'];
+        $catatan->kategori_id = $validatedData['kategori']; // Ubah 'kategori' menjadi 'kategori_id'
         $catatan->save();
 
         // Redirect ke halaman yang sesuai setelah mengupdate catatan
         return redirect()->route('home')->with('success', 'Catatan harian berhasil diperbarui.');
     }
+
 
     public function filterCatatan(Request $request)
     {

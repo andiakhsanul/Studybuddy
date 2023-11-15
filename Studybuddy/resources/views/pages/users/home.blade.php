@@ -48,11 +48,16 @@
                 </div>
 
                 <div class="card-body">
-                    <h5 class="card-title text-primary">List Catatan :</h5>
+                    <div class="d-flex align-items-center">
+                        <h5 class="card-title text-primary" style="margin-right: 10px;">List Catatan :</h5>
+                        <button id="buatCatatanButton" class="btn btn-success btn-hover ml-2" type="button">
+                            <i class="bx bx-plus"></i> Buat Catatan
+                        </button>
+                    </div>
                     <hr>
-                    <button id="buatCatatanButton" class="btn btn-success btn-hover mb-4" type="button">
+                    {{-- <button id="buatCatatanButton" class="btn btn-success btn-hover mb-4" type="button">
                         <i class="bx bx-plus"></i> Buat Catatan
-                    </button>
+                    </button> --}}
 
                     {{-- Form Catatan --}}
                     <div id="isiContentSection" style="display: none;">
@@ -142,7 +147,7 @@
                                                 </div>
                                                 <hr class="hr-blue" style="border-color: blue;">
                                                 {{-- Menampilkan Tugas --}}
-                                                {{-- @foreach ($tugas as $tugass)
+                                                @foreach ($tugas as $tugass)
                                                     @if ($tugass->jadwalharian_id == $catatan->id)
                                                         <div class="tugas-item" data-tugas-id="{{ $tugass->id }}">
                                                             <div class="d-flex justify-content-between">
@@ -164,7 +169,6 @@
                                                             <p class="informasi-tambahan">
                                                                 <span class="tanggal">
                                                                     {{ date('l, j n Y H:i', strtotime($tugass->TENGGAT_WAKTU)) }}
-                                                                    |
                                                                 </span>
                                                                 <span class="status">
                                                                     @if ($tugass->STATUS == 1)
@@ -180,54 +184,7 @@
                                                             </p>
                                                         </div>
                                                     @endif
-                                                @endforeach --}}
-
-                                                @foreach ($tugas as $tugass)
-                                                    @if ($tugass->jadwalharian_id == $catatan->id)
-                                                        {{-- Menampilkan Tugas --}}
-                                                        <div class="tugas-item" data-tugas-id="{{ $tugass->id }}">
-                                                            <p class="deskripsi-tugas">
-                                                                {{ $tugass->jadwalharian_id }} | {{ $tugass->DESK_TUGAS }}
-                                                                |
-                                                                {{ $tugass->TENGGAT_WAKTU }} |
-                                                                @if ($tugass->STATUS == 1)
-                                                                    {{ 'selesai' }}
-                                                                @else
-                                                                    {{ 'belum selesai' }}
-                                                                @endif
-                                                                @if ($tugass->Skala_Prioritas == 1)
-                                                                    {{ 'Penting' }}
-                                                                @else
-                                                                    {{ 'Tidak Penting' }}
-                                                                @endif
-                                                            </p>
-                                                            <button class="btn btn-warning btn-hover btn-edit-tugas"
-                                                                type="button"
-                                                                data-tugas-id="{{ $tugass->id }}">Edit</button>
-                                                            <button class="btn btn-danger btn-hover btn-delete-tugas"
-                                                                type="button"
-                                                                data-tugas-id="{{ $tugass->id }}">Hapus</button>
-                                                        </div>
-                                                    @endif
                                                 @endforeach
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-primary btn-hover btn-edit" type="button"
-                                                    data-catatan-id="{{ $catatan->id }}">
-                                                    <i class="bx bx-pencil"></i>
-                                                </button>
-                                            </div>
-                                            <div>
-                                                <button class="buatListTugasButton btn btn-success btn-hover"
-                                                    type="button" data-catatan-id="{{ $catatan->id }}">
-                                                    <i class="bx bx-plus"></i>
-                                                </button>
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-danger btn-hover btn-delete" type="button"
-                                                    data-catatan-id="{{ $catatan->id }}">
-                                                    <i class="bx bx-trash"></i>
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -249,6 +206,19 @@
                                                     <label for="kegiatan" class="form-label">Kegiatan:</label>
                                                     <input type="text" name="kegiatan" id="kegiatan"
                                                         class="form-control" value="{{ $catatan->KEGIATAN }}" required>
+                                                </div>
+                                                <div class="mt-2 d-flex align-items-center">
+                                                    <label for="kategoriSelect" class="mb-0">Kategori :</label>
+                                                    <select name="kategoriSelect" class="form-select"
+                                                        data-catatan-id="{{ $catatan->id }}">
+                                                        <option value="" selected>Pilih Kategori</option>
+                                                        @foreach ($kategoris as $kategori)
+                                                            <option value="{{ $kategori->id }}"
+                                                                {{ $kategori->id == $catatan->kategori_id ? 'selected' : '' }}>
+                                                                {{ $kategori->Nama_Kategori }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
 
                                                 <div class="row mt-4">
