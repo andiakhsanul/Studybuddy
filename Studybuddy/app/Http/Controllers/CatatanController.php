@@ -33,7 +33,6 @@ class CatatanController extends Controller
         return redirect()->route('home')->with('success', 'Catatan harian berhasil disimpan.');
     }
 
-    // No 2
     public function destroy($id)
     {
         $catatan = Catatan::findOrFail($id);

@@ -38,12 +38,13 @@ Route::post('/submitLogin', [LoginController::class, 'submitLogin'])->name('subm
 Route::group(['middleware' => 'users'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
-    Route:: get('/admin',[AdminController::class, 'index'])->name('adminPage');
+    Route::get('/admin', [AdminController::class, 'index'])->name('adminPage');
 });
 Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
 
 //route buat form buat catatannya
 Route::post('/storeCatatan', [CatatanController::class, 'store'])->name('storeCatatan');
+Route::put('/catatan/{id}/update-kategori', [CatatanController::class, 'updateKategori'])->name('updateKategori');
 Route::post('/storeTugas', [TugasController::class, 'store'])->name('storeTugas');
 
 //update data tabel jadwalharian
@@ -71,5 +72,3 @@ Route::get('/tugas', [TugasController::class, 'index'])->name('tugas');
 
 // make route indexuserall
 Route::get('/manageusers', [AdminController::class, 'indexuserall'])->name('usersadmin');
-
-

@@ -7,57 +7,61 @@
                 <div class="card-header text-center bg-primary">
                     <h4 class="text-white">Catatan Harian {{ $namaUser }}</h4>
                 </div>
-                {{-- Filter Catatan User --}}
                 <div class="card-body">
                     <h5 class="card-title text-primary">Search Catatan :</h5>
                     <form action="{{ route('filterCatatan') }}" method="POST">
                         @csrf
-                        <div class="mb-3">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="kategoriFilter" class="form-label text-primary">Kategori :</label>
-                                    <select name="kategoriFilter" id="kategoriFilter" class="form-select text-primary">
-                                        <option value="" selected>Semua Kategori</option>
-                                        @foreach ($kategoris as $kategori)
-                                            <option value="{{ $kategori->id }}">{{ $kategori->Nama_Kategori }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="prioritasFilter" class="form-label text-primary">Prioritas Tugas:</label>
-                                    <select name="prioritasFilter" id="prioritasFilter" class="form-select text-primary">
-                                        <option value="" class="text-primary" selected>Semua Prioritas</option>
-                                        <option value="rendah" class="text-primary">Rendah</option>
-                                        <option value="sedang" class="text-primary">Sedang</option>
-                                        <option value="tinggi" class="text-primary">Tinggi</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="statusFilter" class="form-label text-primary">Status Tugas :</label>
-                                    <select name="statusFilter" id="statusFilter" class="form-select text-primary">
-                                        <option value="" class="text-primary" selected>Semua Status</option>
-                                        <option value="selesai" class="text-primary">Selesai</option>
-                                        <option value="belum selesai" class="text-primary">Belum Selesai</option>
-                                    </select>
-                                </div>
+                        <div class="mb-3 row align-items-center">
+                            <div class="col-md-3 d-flex align-items-center" style="width: 300px;">
+                                <label for="kategoriFilter" class="form-label text-primary mb-0 me-2"
+                                    style="width: 150px;">Kategori :</label>
+                                <select name="kategoriFilter" id="kategoriFilter"
+                                    class="form-select form-select-sm text-primary" style="margin-left: -30px;">
+                                    <option value="" selected>Semua Kategori</option>
+                                    @foreach ($kategoris as $kategori)
+                                        <option value="{{ $kategori->id }}">{{ $kategori->Nama_Kategori }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-center" style="width: 300px;">
+                                <label for="prioritasFilter" class="form-label text-primary mb-0 me-2"
+                                    style="width: 350px;">Prioritas Tugas :</label>
+                                <select name="prioritasFilter" id="prioritasFilter"
+                                    class="form-select form-select-sm text-primary" style="margin-left: -60px;">
+                                    <option value="" class="text-primary" selected>Semua Prioritas</option>
+                                    <option value="1" class="text-primary">Penting</option>
+                                    <option value="0" class="text-primary">Kurang Penting</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-center" style="width: 300px;">
+                                <label for="statusFilter" class="form-label text-primary mb-0 me-2"
+                                    style="width: 350px;">Status Tugas :</label>
+                                <select name="statusFilter" id="statusFilter"
+                                    class="form-select form-select-sm text-primary" style="margin-left: -100px;">
+                                    <option value="" class="text-primary" selected>Semua Status</option>
+                                    <option value="1" class="text-primary">Selesai</option>
+                                    <option value="0" class="text-primary">Belum Selesai</option>
+                                </select>
+                            </div>
+                            <div class="col-md-1 d-flex">
+                                <button type="submit" class="btn btn-sm btn-primary d-flex align-items-center"
+                                    style="margin-right: 10px;">
+                                    <i class='bx bx-search' style="margin-right: 5px;"></i> Search
+                                </button>
                             </div>
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Terapkan Filter</button>
                     </form>
-                </div>
 
-                <div class="card-body">
+                    {{-- List Catatan --}}
                     <div class="d-flex align-items-center">
                         <h5 class="card-title text-primary" style="margin-right: 10px;">List Catatan :</h5>
-                        <button id="buatCatatanButton" class="btn btn-success btn-hover ml-2" type="button">
-                            <i class="bx bx-plus"></i> Buat Catatan
+                        <button id="buatCatatanButton"
+                            class="btn btn-success btn-hover btn-sm ml-2 mb-0 me-2 d-flex align-items-center" type="button"
+                            style="margin-right: 10px;">
+                            <i class="bx bx-plus" style="margin-right: 5px;"></i> Buat Catatan
                         </button>
                     </div>
                     <hr>
-                    {{-- <button id="buatCatatanButton" class="btn btn-success btn-hover mb-4" type="button">
-                        <i class="bx bx-plus"></i> Buat Catatan
-                    </button> --}}
 
                     {{-- Form Catatan --}}
                     <div id="isiContentSection" style="display: none;">
@@ -168,18 +172,21 @@
                                                             </div>
                                                             <p class="informasi-tambahan">
                                                                 <span class="tanggal">
-                                                                    {{ date('l, j n Y H:i', strtotime($tugass->TENGGAT_WAKTU)) }}
+                                                                    {{ date('l, j-n-Y H:i', strtotime($tugass->TENGGAT_WAKTU)) }}
+                                                                    |
                                                                 </span>
                                                                 <span class="status">
+                                                                    Status Tugas :
                                                                     @if ($tugass->STATUS == 1)
-                                                                        {{ 'selesai' }}
+                                                                        {{ 'Selesai | ' }}
                                                                     @else
-                                                                        {{ 'belum selesai' }}
-                                                                    @endif |
+                                                                        {{ 'Belum Selesai | ' }}
+                                                                    @endif
                                                                 </span>
                                                                 <span class="skala-prioritas">
                                                                     Skala Prioritas:
-                                                                    {{ $tugass->Skala_Prioritas == 1 ? 'Penting' : 'Tidak Penting' }}
+                                                                    {{ $tugass->Skala_Prioritas == 1 ? 'Penting' : 'Kurang Penting' }}
+                                                                    |
                                                                 </span>
                                                             </p>
                                                         </div>
@@ -207,20 +214,18 @@
                                                     <input type="text" name="kegiatan" id="kegiatan"
                                                         class="form-control" value="{{ $catatan->KEGIATAN }}" required>
                                                 </div>
-                                                <div class="mt-2 d-flex align-items-center">
-                                                    <label for="kategoriSelect" class="mb-0">Kategori :</label>
-                                                    <select name="kategoriSelect" class="form-select"
-                                                        data-catatan-id="{{ $catatan->id }}">
-                                                        <option value="" selected>Pilih Kategori</option>
+                                                <div class="mb-3">
+                                                    <label for="kategori" class="form-label">Kategori :</label>
+                                                    <select name="kategori" id="kategori" class="form-select" required>
+                                                        <option value="" selected disabled>Pilih Kategori</option>
                                                         @foreach ($kategoris as $kategori)
                                                             <option value="{{ $kategori->id }}"
-                                                                {{ $kategori->id == $catatan->kategori_id ? 'selected' : '' }}>
+                                                                {{ $catatan->kategori_id == $kategori->id ? 'selected' : '' }}>
                                                                 {{ $kategori->Nama_Kategori }}
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-
                                                 <div class="row mt-4">
                                                     <div class="col-md-12">
                                                         <div class="d-flex justify-content-center gap-2 ">
@@ -233,6 +238,7 @@
                                             </form>
                                         </div>
                                     </div>
+
 
                                     {{-- Form Tambah Tugas --}}
                                     <div id="addTugas" style="display: none;" data-catatan-id="{{ $catatan->id }}">
@@ -799,12 +805,12 @@
             });
         });
 
-        // Update kategori pada
+        // Update kategori pada catatan
         $(document).ready(function() {
             $('select[name="kategoriSelect"]').change(function() {
                 let catatanId = $(this).data('catatan-id');
                 let kategoriId = $(this).val();
-                let updateKategoriUrl = "{{ route('updateKategori', ':id') }}".replace(':id', catatanId);
+                let updateKategoriUrl = "{{ url('catatan') }}/" + catatanId + "/update-kategori";
 
                 $.ajax({
                     url: updateKategoriUrl,
@@ -814,7 +820,9 @@
                         kategori_id: kategoriId
                     },
                     success: function(response) {
-                        showNotification(response.message, 'success');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 200);
                     },
                     error: function(xhr) {
                         console.log(xhr);
@@ -922,7 +930,7 @@
                             <div class="mb-3">
                                 <label for="Skala_Prioritas" class="form-label">Skala Prioritas:</label>
                                 <select name="Skala_Prioritas" class="form-control" required>
-                                    <option value="0">Tidak Penting</option>
+                                    <option value="0">Kurang Penting</option>
                                     <option value="1">Penting</option>
                                 </select>
                             </div>
