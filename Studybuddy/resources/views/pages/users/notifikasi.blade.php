@@ -36,7 +36,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="2" class="text-center">Belum ada notifikasi yang masuk</td>
+                <td colspan="2" class="text-center text-primary"><b>Belum ada notifikasi yang masuk</b></td>
             </tr>
             @endforelse
         </tbody>
@@ -45,7 +45,7 @@
 
 
 {{-- Versi Statiknya --}}
-{{-- <div class="row pt-4">
+<div class="row pt-4">
     <div class="col">
         <div class="card mb-3">
             <div class="card-header text-center bg-primary">
@@ -86,6 +86,6 @@
             </tr>
         </tbody>
     </table>
-</div> --}}
+</div>
 
 @endsection
