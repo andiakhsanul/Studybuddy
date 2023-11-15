@@ -141,9 +141,9 @@
                                                     </div>
                                                 </div>
                                                 <hr class="hr-blue" style="border-color: blue;">
-                                                @foreach ($tugas as $tugass)
+                                                {{-- Menampilkan Tugas --}}
+                                                {{-- @foreach ($tugas as $tugass)
                                                     @if ($tugass->jadwalharian_id == $catatan->id)
-                                                        {{-- Menampilkan Tugas --}}
                                                         <div class="tugas-item" data-tugas-id="{{ $tugass->id }}">
                                                             <div class="d-flex justify-content-between">
                                                                 <p class="deskripsi-tugas">
@@ -180,7 +180,54 @@
                                                             </p>
                                                         </div>
                                                     @endif
+                                                @endforeach --}}
+
+                                                @foreach ($tugas as $tugass)
+                                                    @if ($tugass->jadwalharian_id == $catatan->id)
+                                                        {{-- Menampilkan Tugas --}}
+                                                        <div class="tugas-item" data-tugas-id="{{ $tugass->id }}">
+                                                            <p class="deskripsi-tugas">
+                                                                {{ $tugass->jadwalharian_id }} | {{ $tugass->DESK_TUGAS }}
+                                                                |
+                                                                {{ $tugass->TENGGAT_WAKTU }} |
+                                                                @if ($tugass->STATUS == 1)
+                                                                    {{ 'selesai' }}
+                                                                @else
+                                                                    {{ 'belum selesai' }}
+                                                                @endif
+                                                                @if ($tugass->Skala_Prioritas == 1)
+                                                                    {{ 'Penting' }}
+                                                                @else
+                                                                    {{ 'Tidak Penting' }}
+                                                                @endif
+                                                            </p>
+                                                            <button class="btn btn-warning btn-hover btn-edit-tugas"
+                                                                type="button"
+                                                                data-tugas-id="{{ $tugass->id }}">Edit</button>
+                                                            <button class="btn btn-danger btn-hover btn-delete-tugas"
+                                                                type="button"
+                                                                data-tugas-id="{{ $tugass->id }}">Hapus</button>
+                                                        </div>
+                                                    @endif
                                                 @endforeach
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-primary btn-hover btn-edit" type="button"
+                                                    data-catatan-id="{{ $catatan->id }}">
+                                                    <i class="bx bx-pencil"></i>
+                                                </button>
+                                            </div>
+                                            <div>
+                                                <button class="buatListTugasButton btn btn-success btn-hover"
+                                                    type="button" data-catatan-id="{{ $catatan->id }}">
+                                                    <i class="bx bx-plus"></i>
+                                                </button>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-danger btn-hover btn-delete" type="button"
+                                                    data-catatan-id="{{ $catatan->id }}">
+                                                    <i class="bx bx-trash"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -771,11 +818,11 @@
                 if (form.is(':visible')) {
                     btn.html("<i class='bx bx-plus'></i> Buat Catatan");
                     btn.removeClass('btn-danger').addClass('btn-success');
-                    btnDelete.show(); // Menampilkan tombol hapus catatan
+                    btnDelete.show();
                 } else {
                     btn.html("<i class='bx bx-minus'></i> Batal");
                     btn.removeClass('btn-success').addClass('btn-danger');
-                    btnDelete.hide(); // Menyembunyikan tombol hapus catatan
+                    btnDelete.hide();
                 }
 
                 form.slideToggle();
@@ -857,7 +904,9 @@
                 card.show();
             });
         });
+    </script>
 
+    <script>
         // script untuk menambahkan form tugas
         $(document).ready(function() {
             let formCounter = 0;
@@ -867,13 +916,10 @@
                 let addTugasSection = $('#addTugas[data-catatan-id="' + catatanId + '"]');
                 let tugasRow = addTugasSection.find('#tugasRow');
 
-                // Increment the formCounter for unique form ID
                 formCounter++;
 
-                // Generate unique form ID
                 let formId = 'formTugas' + formCounter;
 
-                // Variabel untuk Buat form tugas baru
                 let newTugasForm = `
                 <form id="${formId}" class="dynamic-form" action="{{ route('storeTugas') }}" method="POST">
                     @csrf
@@ -882,10 +928,10 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="mb-3 d-flex justify-content-between align-items-center">
-                                <label for="DESK_TUGAS" class="form-label">Nama Tugas :</label>
+                                <label for="DESK_TUGAS" class="form-label">Deskripsi Tugas:</label>
                                 <button class="hapusTugasButton btn btn-danger ml-2" type="button" data-catatan-id="${catatanId}">Hapus</button>
                             </div>
-                            <input name="DESK_TUGAS" class="form-control" required></input>
+                            <textarea name="DESK_TUGAS" class="form-control" required></textarea>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
@@ -913,7 +959,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="jadwalharian_id" value="${catatanId}">
-                    <input type="hidden" name="mahasiswaId" value="{{ $usersId }}">
+                    <input type="hidden" name="usersId" value="{{ $usersId }}">
                 </form>
             `;
 
@@ -933,11 +979,8 @@
 
             $(document).on('click', '#submitAllForms', function() {
                 let forms = $('.dynamic-form');
-
-                // iterasi/refresh dan pengiriman form menggunakan AJAX
                 forms.each(function() {
                     let form = $(this);
-
                     console.log(form)
 
                     $.ajax({
@@ -957,13 +1000,11 @@
             });
         });
 
-        // script untuk menghapus div dan isi database form tugas spesifik
         $(document).ready(function() {
             $(document).on('click', '.btn-delete-tugas', function() {
                 let tugasId = $(this).data('tugas-id');
                 let deleteUrl = "{{ route('deleteTugas', ':id') }}".replace(':id', tugasId);
 
-                // Konfirmasi dialog sebelum menghapus tugas
                 if (confirm('Apakah Anda yakin ingin menghapus tugas ini?')) {
                     $.ajax({
                         url: deleteUrl,
@@ -972,7 +1013,6 @@
                             _token: "{{ csrf_token() }}"
                         },
                         success: function(response) {
-                            // Menghapus div tugas yang sesuai dengan tugas yang dihapus
                             $('.tugas-item[data-tugas-id="' + tugasId + '"]').remove();
                             showNotification(response.message, 'success');
                         },
@@ -986,56 +1026,49 @@
             });
         });
 
-        // script untuk memunculkan form edit tugas dan update tabel tugas spesifik
         $(document).ready(function() {
-            // Ketika tombol "Edit" di klik, tampilkan form edit dan isi data tugas yang sesuai
+
             $(document).on('click', '.btn-edit-tugas', function() {
-                let tugasId = $(this).data('tugas-id'); // Ambil ID tugas dari atribut data-tugas-id
+                let tugasId = $(this).data('tugas-id');
                 let form = $('.card.mt-3');
 
-                // Ambil data tugas dari paragraf dan isikan ke dalam form
                 let deskripsi = $(this).parent().find('.deskripsi-tugas').text();
                 let tenggatWaktu = $(this).parent().find('.tenggat-waktu').text();
                 let status = $(this).parent().find('.status-tugas').text();
+                let Skala_Prioritas = $(this).parent().find('.skala-prioritas').text();
 
                 form.find('textarea[name="DESK_TUGAS"]').val(deskripsi);
                 form.find('input[name="TENGGAT_WAKTU"]').val(tenggatWaktu);
                 form.find('select[name="STATUS"]').val(status === 'selesai' ? 1 : 0);
+                form.find('select[name="Skala_Prioritas"]').val(Skala_Prioritas === 'selesai' ? 1 : 0);
 
-                // Tampilkan form edit
                 form.show();
             });
 
-            // Ketika tombol "Cancel" pada form edit di klik, sembunyikan form edit
             $(document).on('click', '.btn-cancel-edit', function() {
                 let form = $('.card.mt-3');
                 form.hide();
             });
 
-            // Submit form (with AJAX request)
             $(document).on('click', '.submit-button', function() {
                 let form = $('#editForm');
                 let data = form.serialize();
                 let tugasId =
-                    '{{ $tugass->id ?? null }}'; // Use null as default if $tugass->id is not defined
+                    '{{ $tugass->id ?? null }}';
 
                 if (tugasId === null) {
-                    // Handle case where tugasId is not defined or the user has no tasks
                     console.log('Tugas ID is not defined');
-
                     return;
                 }
 
                 $.ajax({
                     url: '/tugas/' + tugasId,
-                    type: 'PUT', // Menggunakan metode PUT karena ingin mengupdate data
+                    type: 'PUT',
                     data: data,
                     success: function(response) {
-                        // Handle success response, misalnya memberikan pesan sukses atau mengambil data terbaru
                         console.log(response);
                     },
                     error: function(error) {
-                        // Handle error response, misalnya memberikan pesan error atau menangani kesalahan lainnya
                         console.error(error);
                     }
                 });
