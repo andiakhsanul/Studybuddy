@@ -19,6 +19,8 @@
 
     @yield('content')
 
+    @include('partials.rightsidebar')
+
 </body>
 
 </html>
