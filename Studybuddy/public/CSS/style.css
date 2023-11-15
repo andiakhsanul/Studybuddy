@@ -266,3 +266,20 @@ label[for="kategoriSelect"] {
 .btn-sm {
     padding: 4px 6px; /* Sesuaikan dengan ukuran yang Anda inginkan */
 }
+
+/* Mengatur gaya untuk semua select pada form */
+/* form select {
+    width: 120px;
+    padding: 5px;
+    font-size: 12px;
+} */
+
+/* Mengubah ukuran option */
+/* form select option {
+    font-size: 12px;
+} */
+
+/* Mengatur margin kanan pada label "Kategori" */
+/* label[for="kategoriFilter"] {
+    margin-right: 10px;
+} */
