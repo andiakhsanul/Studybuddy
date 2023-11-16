@@ -74,6 +74,5 @@
     </main>
 
 
-    <script src="orders.js"></script>
-    <script src="js/admin.js"></script>
+
 @endsection

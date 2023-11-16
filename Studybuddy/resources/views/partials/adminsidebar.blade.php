@@ -14,12 +14,6 @@
         </div>
 
         <div class="sidebar">
-            <a href="#">
-                <span class="material-icons-sharp">
-                    dashboard
-                </span>
-                <h3>Dashboard</h3>
-            </a>
             <a href="{{ route('usersadmin') }}" class="{{ Request::is('manageusers*') ? 'active' : '' }}">
                 <span class="material-icons-sharp">
                     person_outline

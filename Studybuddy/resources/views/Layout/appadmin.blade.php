@@ -22,5 +22,7 @@
     @include('partials.rightsidebar')
 
 </body>
+<script src="orders.js"></script>
+<script src="js/admin.js"></script>
 
 </html>
