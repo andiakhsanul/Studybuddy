@@ -66,6 +66,12 @@
                             <p><a href="{{ route('registerForms') }}" class="link-info">Daftar Akun</a></p>
                         </div>
                     </form>
+                    <div class="col-md-9">
+                        <a class="btn btn-lg btn-google btn-block text-uppercase btn-outline"
+                            href="{{ route('google.redirect') }}"><img
+                                src="https://img.icons8.com/color/16/000000/google-logo.png"> google
+                            </a>
+                    </div>
                 </div>
             </div>
         </div>

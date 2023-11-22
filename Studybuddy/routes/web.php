@@ -8,6 +8,7 @@ use App\Http\Controllers\CatatanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\socialController;
 
 // Route::get('/', function () {
 //     return view('pages.Index.login', [
@@ -72,3 +73,6 @@ Route::get('/tugas', [TugasController::class, 'index'])->name('tugas');
 
 // make route indexuserall
 Route::get('/manageusers', [AdminController::class, 'indexuserall'])->name('usersadmin');
+
+route::get('/auth/redirect',[socialController::class,'redirect'])->name('google.redirect');
+route::get('/google/callback',[socialController::class,'googleCallback'])->name('google.callback');
