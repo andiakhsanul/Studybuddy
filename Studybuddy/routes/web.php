@@ -8,7 +8,7 @@ use App\Http\Controllers\CatatanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\NotifikasiController;
-
+use App\Http\Controllers\Auth\SocialiteController;
 // Route::get('/', function () {
 //     return view('pages.Index.login', [
 //         'title' => 'Login'
@@ -72,3 +72,10 @@ Route::get('/tugas', [TugasController::class, 'index'])->name('tugas');
 
 // make route indexuserall
 Route::get('/manageusers', [AdminController::class, 'indexuserall'])->name('usersadmin');
+
+
+/**
+ * socialite auth
+ */
+Route::get('/auth/{provider}', [SocialiteController::class, 'redirectToProvider']);
+Route::get('/auth/{provider}/callback', [SocialiteController::class, 'handleProvideCallback']);

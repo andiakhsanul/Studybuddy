@@ -39,4 +39,8 @@ class Users extends Authenticatable
     {
         return $this->hasMany(Tugas::class, 'users_id');
     }
+    public function socialAccounts()
+{
+  return $this->hasMany(SocialAccount::class);
+}
 }
