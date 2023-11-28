@@ -2,14 +2,13 @@
 
 @section('content')
     <main>
-
         <h1>Analytics</h1>
         <!-- Analyses -->
         <div class="analyse">
             <div class="sales">
                 <div class="status">
                     <div class="info">
-                        <h3></h3>users
+                        <h3 style="text-align: center">Total Akun Users</h3>
                         <h1>{{ $userCount }}</h1>
                     </div>
                     <div class="progresss">
@@ -26,7 +25,7 @@
             <div class="visits">
                 <div class="status">
                     <div class="info">
-                        <h3>Tugas</h3>
+                        <h3 style="text-align: center">Total Tugas</h3>
                         <h1>{{ $tugasCount }}</h1>
                     </div>
                     <div class="progresss">
@@ -43,7 +42,7 @@
             <div class="searches">
                 <div class="status">
                     <div class="info">
-                        <h3>Tugas kategori</h3>
+                        <h3 style="text-align: center">Kategori Tugas</h3>
                         <h1>{{ $kategoriCount }}</h1>
                     </div>
                     <div class="progresss">
@@ -72,7 +71,4 @@
             </div>
         </div>
     </main>
-
-
-
 @endsection

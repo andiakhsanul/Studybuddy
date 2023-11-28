@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminAnalitiksController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminTugasController;
+use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\CatatanController;
@@ -38,7 +41,9 @@ Route::post('/submitLogin', [LoginController::class, 'submitLogin'])->name('subm
 Route::group(['middleware' => 'users'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
-    Route::get('/admin', [AdminController::class, 'index'])->name('adminPage');
+    Route::get('/admin', [AdminAnalitiksController::class, 'index'])->name('adminPage');
+    Route::get('/manageusers', [AdminUsersController::class, 'index'])->name('usersadmin');
+    Route::get('/managetugas', [AdminTugasController::class, 'index'])->name('tugas');
 });
 Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
 
@@ -62,13 +67,11 @@ Route::put('/update-kategori/{id}', 'CatatanController@updateKategori')->name('u
 Route::get('/register/view', [RegisterController::class, 'index'])->name('registerForms');
 Route::post('/register/data', [RegisterController::class, 'submitRegister'])->name('submitRegister');
 
-
-
+// Search Catatan
 Route::post('/filterCatatan', 'CatatanController@filter')->name('filterCatatan');
 
-//route to get tugas for admin
-Route::get('/tugas', [TugasController::class, 'index'])->name('tugas');
+// admin manage tabel user
+Route::put('/edit-user/{id}', [AdminUsersController::class, 'editUser'])->name('editUser');
+Route::delete('/delete-user/{id}', [AdminUsersController::class, 'deleteUser'])->name('deleteUser');
+Route::post('/tambah-user', [AdminUsersController::class, 'storeUser'])->name('tambahUser');
 
-
-// make route indexuserall
-Route::get('/manageusers', [AdminController::class, 'indexuserall'])->name('usersadmin');

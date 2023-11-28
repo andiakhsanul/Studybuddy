@@ -39,4 +39,9 @@ class Users extends Authenticatable
     {
         return $this->hasMany(Tugas::class, 'users_id');
     }
+
+    public function getRawPasswordAttribute()
+    {
+        return $this->attributes['PASSWORD'];
+    }
 }
