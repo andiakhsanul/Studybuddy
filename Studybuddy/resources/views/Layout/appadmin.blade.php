@@ -20,12 +20,14 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"
-        integrity="sha384-pzjw8b+qU8HP2q4jslNXlePKotTNU5dhYlFfNf5R6hAeLv1d13Byq7wYLpd8pdsQ"
-        crossorigin="anonymous"></script>
+        integrity="sha384-pzjw8b+qU8HP2q4jslNXlePKotTNU5dhYlFfNf5R6hAeLv1d13Byq7wYLpd8pdsQ" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyfFW73W/8f+kfTN2BOgdkH4MhXjstZ" crossorigin="anonymous"></script>
     <script src="{{ asset('orders.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <title> {{ $title }} Dashboard Admin</title>
 </head>
