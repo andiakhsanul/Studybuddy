@@ -26,25 +26,23 @@
                 </span>
                 <h3>Users</h3>
             </a>
-            <a href="#">
+            <a href="{{ route('kategoriadmin') }}" class="{{ Request::is('managekategori*') ? 'active' : '' }}">
+                <span class="material-icons-sharp">
+                    inventory
+                </span>
+                <h3>Kategori</h3>
+            </a>
+            <a href="{{ route('tugasadmin') }}" class="{{ Request::is('managetugas*') ? 'active' : '' }}">
                 <span class="material-icons-sharp">
                     receipt_long
                 </span>
                 <h3>Tugas</h3>
-                <span class="message-count">27</span>
             </a>
             <a href="#">
                 <span class="material-icons-sharp">
                     mail_outline
                 </span>
                 <h3>Pesan</h3>
-                <span class="message-count">27</span>
-            </a>
-            <a href="#">
-                <span class="material-icons-sharp">
-                    inventory
-                </span>
-                <h3>Kategori</h3>
                 <span class="message-count">27</span>
             </a>
             <a href="{{ route('logout') }}">

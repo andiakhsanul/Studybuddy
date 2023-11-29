@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminAnalitiksController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminKategoriController;
 use App\Http\Controllers\AdminTugasController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\LoginController;
@@ -43,7 +44,8 @@ Route::group(['middleware' => 'users'], function () {
     Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
     Route::get('/admin', [AdminAnalitiksController::class, 'index'])->name('adminPage');
     Route::get('/manageusers', [AdminUsersController::class, 'index'])->name('usersadmin');
-    Route::get('/managetugas', [AdminTugasController::class, 'index'])->name('tugas');
+    Route::get('/managekategori', [AdminKategoriController::class, 'index'])->name('kategoriadmin');
+    Route::get('/managetugas', [AdminTugasController::class, 'index'])->name('tugasadmin');
 });
 Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
 
@@ -74,4 +76,10 @@ Route::post('/filterCatatan', 'CatatanController@filter')->name('filterCatatan')
 Route::put('/edit-user/{id}', [AdminUsersController::class, 'editUser'])->name('editUser');
 Route::delete('/delete-user/{id}', [AdminUsersController::class, 'deleteUser'])->name('deleteUser');
 Route::post('/tambah-user', [AdminUsersController::class, 'storeUser'])->name('tambahUser');
+
+// admin manage tabel kategori
+Route::put('/edit-kategori/{id}', [AdminKategoriController::class, 'editKategori'])->name('editKategori');
+Route::delete('/delete-kategori/{id}', [AdminKategoriController::class, 'deleteKategori'])->name('deleteKategori');
+Route::post('/tambah-kategori', [AdminKategoriController::class, 'storeKategori'])->name('tambahKategori');
+
 
