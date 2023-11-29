@@ -42,7 +42,7 @@
             <div class="searches">
                 <div class="status">
                     <div class="info">
-                        <h3 style="text-align: center">Kategori Tugas</h3>
+                        <h3 style="text-align: center">Kategori Catatan</h3>
                         <h1>{{ $kategoriCount }}</h1>
                     </div>
                     <div class="progresss">
@@ -87,7 +87,8 @@
                 <div class="status" style="margin-top: 30%; margin-left:18%; margin-bottom:10%">
                     <div class="progresss">
                         <svg>
-                            <circle cx="38" cy="38" r="36" style="stroke-dasharray: {{ $catatanCount * 20 }} 200;"></circle>
+                            <circle cx="38" cy="38" r="36"
+                                style="stroke-dasharray: {{ $catatanCount * 20 }} 200;"></circle>
                         </svg>
                         <div class="percentage">
                             <p>+{{ $catatanCount * 2 }}</p>
@@ -107,7 +108,6 @@
                         @endforeach
                     </ul>
                 </div>
-
                 <div class="chart-container">
                     <canvas id="kategoriChart"></canvas>
                 </div>
