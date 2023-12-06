@@ -17,6 +17,16 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link btn-success border text-white rounded {{ Request::is('search*') ? 'active' : '' }}" href="{{ route('search') }}">
+                <div class="d-flex align-items-center">
+                    <i class='bx bxs-search' class="mr-2" width="25" height="25" style="margin-right: 10px;"></i>
+                    <span style="margin-right: 10px;">
+                        <span style="font-weight: bold;">Search</span>
+                    </span>
+                </div>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link btn-success border text-white rounded {{ Request::is('notifikasi*') ? 'active' : '' }}" href="{{ route('notifikasi') }}">
                 <div class="d-flex align-items-center">
                     <i class='bx bxs-bell-ring' class="mr-2" width="25" height="25" style="margin-right: 10px;"></i>

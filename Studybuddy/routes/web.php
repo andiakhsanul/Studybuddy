@@ -12,6 +12,7 @@ use App\Http\Controllers\CatatanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\SearchController;
 
 // Route::get('/', function () {
 //     return view('pages.Index.login', [
@@ -41,6 +42,7 @@ Route::post('/submitLogin', [LoginController::class, 'submitLogin'])->name('subm
 
 Route::group(['middleware' => 'users'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
     Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
     Route::get('/admin', [AdminAnalitiksController::class, 'index'])->name('adminPage');
     Route::get('/manageusers', [AdminUsersController::class, 'index'])->name('usersadmin');
@@ -71,7 +73,7 @@ Route::post('/register/data', [RegisterController::class, 'submitRegister'])->na
 
 // Search Catatan
 // Route::post('/filterCatatan', 'CatatanController@filter')->name('filterCatatan');
-Route::post('/filterCatatan', [HomeController::class, 'filterCatatan'])->name('filterCatatan');
+Route::post('/filterCatatan', [SearchController::class, 'filterCatatan'])->name('filterCatatan');
 
 // admin manage tabel user
 Route::put('/edit-user/{id}', [AdminUsersController::class, 'editUser'])->name('editUser');
