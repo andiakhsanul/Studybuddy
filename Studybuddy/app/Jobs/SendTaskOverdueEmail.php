@@ -20,14 +20,17 @@ class SendTaskOverdueEmail implements ShouldQueue
      */
     public function handle(): void
     {
-        // Dapatkan tugas yang waktunya mendekati 5 menit dari waktu sekarang
-        $nearDueTasks = Tugas::where('TENGGAT_WAKTU', '<=', now()->addMinutes(5)) // Hanya tugas yang mendekati dalam 5 menit
-            ->where('STATUS', false) // Pastikan tugas belum selesai
+        $nearDueTasks = Tugas::where('TENGGAT_WAKTU', '<=', now()->addMinutes(5))
+            ->where('STATUS', false)
             ->get();
 
-        // Kirim email untuk setiap tugas yang mendekati waktu sekarang
         foreach ($nearDueTasks as $task) {
-            Mail::to($task->users->EMAIL)->send(new TaskOverdueMail($task));
+            // Check if the task is due within the next 5 minutes
+            $dueTime = now()->addMinutes(5);
+            if ($task->TENGGAT_WAKTU <= $dueTime) {
+                // Send email to the user
+                Mail::to($task->users->EMAIL)->send(new TaskOverdueMail($task));
+            }
         }
     }
 }
