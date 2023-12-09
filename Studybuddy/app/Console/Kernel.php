@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new SendTaskOverdueEmail)
             ->everyMinute()
             ->when(function () {
-                return now()->second == 0; // Pekerjaan hanya dijalankan pada detik 0
+                return now()->second == 0;
             })
             ->timezone('Asia/Jakarta');
     }
