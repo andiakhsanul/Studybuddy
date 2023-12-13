@@ -86,3 +86,4 @@ Route::delete('/delete-kategori/{id}', [AdminKategoriController::class, 'deleteK
 Route::post('/tambah-kategori', [AdminKategoriController::class, 'storeKategori'])->name('tambahKategori');
 
 
+Route::get('log-viewers', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
