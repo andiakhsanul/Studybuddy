@@ -29,6 +29,11 @@
                                     style="margin-right: 10px;">
                                     <i class='bx bx-search' style="margin-right: 5px;"></i> Search
                                 </button>
+
+                                <button type="button" class="btn btn-sm btn-danger d-flex align-items-center"
+                                    onclick="resetForm()">
+                                    <i class='bx bx-x' style="margin-right: 5px;"></i> Batal
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -69,22 +74,22 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <button class="btn btn-primary btn-hover btn-edit" type="button"
-                                                                data-catatan-id="{{ $catatan->id }}">
+                                                            <button class="btn btn-primary btn-hover btn-edit"
+                                                                type="button" data-catatan-id="{{ $catatan->id }}">
                                                                 <i class="bx bx-pencil"></i>
                                                             </button>
-                                                            <button class="buatListTugasButton btn btn-success btn-hover" type="button"
-                                                                data-catatan-id="{{ $catatan->id }}">
+                                                            <button class="buatListTugasButton btn btn-success btn-hover"
+                                                                type="button" data-catatan-id="{{ $catatan->id }}">
                                                                 <i class="bx bx-plus"></i>
                                                             </button>
-                                                            <button class="btn btn-danger btn-hover btn-delete" type="button"
-                                                                data-catatan-id="{{ $catatan->id }}">
+                                                            <button class="btn btn-danger btn-hover btn-delete"
+                                                                type="button" data-catatan-id="{{ $catatan->id }}">
                                                                 <i class="bx bx-trash"></i>
                                                             </button>
                                                         </div>
                                                     </div>
                                                     <hr class="hr-blue" style="border-color: blue;">
-                                                    @foreach ($tugas as $tugass)
+                                                    @foreach ($catatan->tugas as $tugass)
                                                         @if ($tugass->jadwalharian_id == $catatan->id)
                                                             <div class="tugas-item" data-tugas-id="{{ $tugass->id }}">
                                                                 <div class="d-flex justify-content-between">
@@ -93,10 +98,14 @@
                                                                         {{ $tugass->DESK_TUGAS }}
                                                                     </p>
                                                                     <div class="button-container">
-                                                                        <button class="btn btn-warning btn-sm btn-hover btn-edit-tugas"
-                                                                            type="button" data-tugas-id="{{ $tugass->id }}">Edit</button>
-                                                                        <button class="btn btn-danger btn-sm btn-hover btn-delete-tugas"
-                                                                            type="button" data-tugas-id="{{ $tugass->id }}">Hapus</button>
+                                                                        <button
+                                                                            class="btn btn-warning btn-sm btn-hover btn-edit-tugas"
+                                                                            type="button"
+                                                                            data-tugas-id="{{ $tugass->id }}">Edit</button>
+                                                                        <button
+                                                                            class="btn btn-danger btn-sm btn-hover btn-delete-tugas"
+                                                                            type="button"
+                                                                            data-tugas-id="{{ $tugass->id }}">Hapus</button>
                                                                     </div>
                                                                 </div>
                                                                 <p class="informasi-tambahan">
@@ -133,17 +142,20 @@
                                                     @method('PUT')
                                                     <div class="mb-3">
                                                         <label for="hari" class="form-label">Hari:</label>
-                                                        <input type="date" name="hari" id="hari" class="form-control"
+                                                        <input type="date" name="hari" id="hari"
+                                                            class="form-control"
                                                             value="{{ $date = explode(' ', $catatan->HARI)[0] }}" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="kegiatan" class="form-label">Kegiatan:</label>
-                                                        <input type="text" name="kegiatan" id="kegiatan" class="form-control"
-                                                            value="{{ $catatan->KEGIATAN }}" required>
+                                                        <input type="text" name="kegiatan" id="kegiatan"
+                                                            class="form-control" value="{{ $catatan->KEGIATAN }}"
+                                                            required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="kategori" class="form-label">Kategori :</label>
-                                                        <select name="kategori" id="kategori" class="form-select" required>
+                                                        <select name="kategori" id="kategori" class="form-select"
+                                                            required>
                                                             <option value="" selected disabled>Pilih Kategori
                                                             </option>
                                                             @foreach ($kategoris as $kategori)
@@ -157,8 +169,10 @@
                                                     <div class="row mt-4">
                                                         <div class="col-md-12">
                                                             <div class="d-flex justify-content-center gap-2 ">
-                                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                                                <button type="button" class="btn btn-danger btn-cancel-edit">Batal</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Simpan</button>
+                                                                <button type="button"
+                                                                    class="btn btn-danger btn-cancel-edit">Batal</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -166,7 +180,8 @@
                                             </div>
                                         </div>
 
-                                        <div id="addTugas" style="display: none;" data-catatan-id="{{ $catatan->id }}">
+                                        <div id="addTugas" style="display: none;"
+                                            data-catatan-id="{{ $catatan->id }}">
                                             <div class="card mt-4">
                                                 <div class="card-body">
 
@@ -175,7 +190,8 @@
                                                     <div class="row mt-4">
                                                         <div class="col-md-12">
                                                             <div class="d-flex justify-content-center">
-                                                                <button type="button" class="submit-button btn btn-primary" value="submit"
+                                                                <button type="button"
+                                                                    class="submit-button btn btn-primary" value="submit"
                                                                     id="submitAllForms">Simpan</button>
                                                             </div>
                                                         </div>
@@ -192,7 +208,8 @@
                                                     @method('PUT')
                                                     <div class="row mt-3">
                                                         <div class="col-md-12">
-                                                            <div class="mb-3 d-flex justify-content-between align-items-center">
+                                                            <div
+                                                                class="mb-3 d-flex justify-content-between align-items-center">
                                                                 <label for="DESK_TUGAS" class="form-label">Deskripsi
                                                                     Tugas:</label>
                                                             </div>
@@ -202,8 +219,8 @@
                                                             <div class="mb-3">
                                                                 <label for="TENGGAT_WAKTU" class="form-label">Waktu
                                                                     Pengumpulan:</label>
-                                                                <input type="datetime-local" name="TENGGAT_WAKTU" class="form-control"
-                                                                    required>
+                                                                <input type="datetime-local" name="TENGGAT_WAKTU"
+                                                                    class="form-control" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -220,9 +237,11 @@
                                                     <div class="row mt-4">
                                                         <div class="col-md-12">
                                                             <div class="d-flex justify-content-center gap-2">
-                                                                <button type="button" class="submit-button btn btn-primary"
+                                                                <button type="button"
+                                                                    class="submit-button btn btn-primary"
                                                                     id="submitAllForms">Simpan</button>
-                                                                <button type="button" class="btn btn-danger btn-cancel-edit">Batal</button>
+                                                                <button type="button"
+                                                                    class="btn btn-danger btn-cancel-edit">Batal</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -234,6 +253,14 @@
                                 </div>
                             @endforeach
                         </div>
+
+                        @if ($currentRoute !== 'filterCatatan' || $currentRoute === 'search')
+                            <div class="row pt-4 text-center">
+                                <div class="col">
+                                    <h4 class="text-primary">Belum ada catatan yang dicari</h4>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -547,5 +574,9 @@
                 });
             }
         });
+
+        function resetForm() {
+            window.location.href = '{{ route('search') }}';
+        }
     </script>
 @endsection

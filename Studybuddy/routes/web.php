@@ -73,7 +73,7 @@ Route::post('/register/data', [RegisterController::class, 'submitRegister'])->na
 
 // Search Catatan
 // Route::post('/filterCatatan', 'CatatanController@filter')->name('filterCatatan');
-Route::post('/filterCatatan', [SearchController::class, 'filterCatatan'])->name('filterCatatan');
+Route::post('/search', [SearchController::class, 'filterCatatan'])->name('filterCatatan');
 
 // admin manage tabel user
 Route::put('/edit-user/{id}', [AdminUsersController::class, 'editUser'])->name('editUser');

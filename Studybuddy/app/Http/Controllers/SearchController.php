@@ -30,6 +30,8 @@ class SearchController extends Controller
             $jadwalharian = collect();
             $tugas = collect();
 
+            $currentRoute = 'search';
+
             return view('pages.users.search', [
                 'title' => 'Search',
                 'namaUser' => $namaUser,
@@ -40,6 +42,7 @@ class SearchController extends Controller
                 'prioritasOptions' => $prioritasOptions,
                 'statusOptions' => $statusOptions,
                 'filteredData' => $filteredData,
+                'currentRoute' => $currentRoute,
             ]);
         } else {
             return redirect()->route('index');
@@ -52,7 +55,13 @@ class SearchController extends Controller
         $filteredData = [];
 
         if (!empty($kategoriFilter)) {
+            // Filter notes based on category
             $filteredData = Catatan::where('kategori_id', $kategoriFilter)->get();
+
+            // Fetch associated tasks for each note
+            foreach ($filteredData as $catatan) {
+                $catatan->tugas = Tugas::where('jadwalharian_id', $catatan->id)->get();
+            }
         }
 
         $user = Auth::user();
@@ -61,6 +70,7 @@ class SearchController extends Controller
         $kategoris = Kategori::all();
         $prioritasOptions = Tugas::distinct()->pluck('Skala_Prioritas');
         $statusOptions = Tugas::distinct()->pluck('STATUS');
+        $currentRoute = 'filterCatatan';
 
         return view('pages.users.search', [
             'title' => 'search',
@@ -72,6 +82,7 @@ class SearchController extends Controller
             'prioritasOptions' => $prioritasOptions,
             'statusOptions' => $statusOptions,
             'filteredData' => $filteredData,
+            'currentRoute' => $currentRoute,
         ]);
     }
 }

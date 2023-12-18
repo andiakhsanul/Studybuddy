@@ -373,12 +373,19 @@
                                                 </div>
                                                 <hr class="hr-blue" style="border-color: blue;">
                                                 {{-- Menampilkan Tugas --}}
+                                                @php
+                                                    $globalIteration = 0;
+                                                @endphp
+
                                                 @foreach ($tugas as $tugass)
+                                                    @php
+                                                        $globalIteration++;
+                                                    @endphp
                                                     @if ($tugass->jadwalharian_id == $catatan->id)
                                                         <div class="tugas-item" data-tugas-id="{{ $tugass->id }}">
                                                             <div class="d-flex justify-content-between">
                                                                 <p class="deskripsi-tugas">
-                                                                    Tugas {{ $loop->iteration }} |
+                                                                    Tugas {{ $globalIteration }} |
                                                                     {{ $tugass->DESK_TUGAS }}
                                                                 </p>
                                                                 <div class="button-container">
