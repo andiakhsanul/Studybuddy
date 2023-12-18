@@ -8,273 +8,6 @@
                     <h4 class="text-white">Catatan Harian {{ $namaUser }}</h4>
                 </div>
                 <div class="card-body">
-                    {{-- <h5 class="card-title text-primary">Search Catatan :</h5>
-                    <form action="{{ route('filterCatatan') }}" method="POST">
-                        @csrf
-                        <div class="mb-3 row align-items-center">
-                            <div class="col-md-3 d-flex align-items-center" style="width: 300px;">
-                                <label for="kategoriFilter" class="form-label text-primary mb-0 me-2"
-                                    style="width: 150px;">Kategori :</label>
-                                <select name="kategoriFilter" id="kategoriFilter"
-                                    class="form-select form-select-sm text-primary" style="margin-left: -30px;">
-                                    <option value="" selected>Semua Kategori</option>
-                                    @foreach ($kategoris as $kategori)
-                                        <option value="{{ $kategori->id }}">{{ $kategori->Nama_Kategori }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <!-- Prioritas Filter -->
-                            <div class="col-md-3 d-flex align-items-center" style="width: 300px;">
-                                <label for="prioritasFilter" class="form-label text-primary mb-0 me-2"
-                                    style="width: 350px;">Prioritas Tugas :</label>
-                                <select name="prioritasFilter" id="prioritasFilter"
-                                    class="form-select form-select-sm text-primary" style="margin-left: -60px;">
-                                    <option value="" class="text-primary" selected>Semua Prioritas</option>
-                                    @foreach ($prioritasOptions as $prioritas)
-                                        <option value="{{ $prioritas }}" class="text-primary">
-                                            @if ($prioritas == 1)
-                                                Penting
-                                            @else
-                                                Kurang Penting
-                                            @endif
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!-- Status Filter -->
-                            <div class="col-md-3 d-flex align-items-center" style="width: 300px;">
-                                <label for="statusFilter" class="form-label text-primary mb-0 me-2"
-                                    style="width: 350px;">Status Tugas :</label>
-                                <select name="statusFilter" id="statusFilter"
-                                    class="form-select form-select-sm text-primary" style="margin-left: -100px;">
-                                    <option value="" class="text-primary" selected>Semua Status</option>
-                                    @foreach ($statusOptions as $status)
-                                        <option value="{{ $status }}" class="text-primary">
-                                            @if ($status == 1)
-                                                Selesai
-                                            @else
-                                                Belum Selesai
-                                            @endif
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="col-md-1 d-flex">
-                                <button type="submit" class="btn btn-sm btn-primary d-flex align-items-center"
-                                    style="margin-right: 10px;">
-                                    <i class='bx bx-search' style="margin-right: 5px;"></i> Search
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div id="resultContainer">
-                        <div class="row pt-4">
-                            @foreach ($filteredData as $catatan)
-                                <div class="col-md-6 mb-3" data-catatan-id="{{ $catatan->id }}">
-                                    <div class="card p-1 bg-primary">
-                                        <div class="card">
-                                            <div class="card-body d-flex align-items-center gap-1">
-                                                <div class="flex-grow-1 tugas-item">
-                                                    @php
-                                                        $formattedDate = \Carbon\Carbon::parse($catatan->HARI)->isoFormat('dddd, D MMMM YYYY', 'Do MMMM YYYY', 'id');
-                                                    @endphp
-                                                    <div class="row">
-                                                        <div class="col-md-8">
-                                                            <h5 class="card-text text-primary">{{ $catatan->KEGIATAN }}<span
-                                                                    class=" text-black">
-                                                                    <h6 class="card-text">{{ $formattedDate }}</h6>
-                                                                </span></h5>
-                                                            <div class="mt-2 d-flex align-items-center">
-                                                                <label for="kategoriSelect" class="mb-0">Kategori :</label>
-                                                                <select name="kategoriSelect" class="form-select"
-                                                                    data-catatan-id="{{ $catatan->id }}">
-                                                                    <option value="" selected>Pilih Kategori</option>
-                                                                    @foreach ($kategoris as $kategori)
-                                                                        <option value="{{ $kategori->id }}"
-                                                                            {{ $kategori->id == $catatan->kategori_id ? 'selected' : '' }}>
-                                                                            {{ $kategori->Nama_Kategori }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <button class="btn btn-primary btn-hover btn-edit" type="button"
-                                                                data-catatan-id="{{ $catatan->id }}">
-                                                                <i class="bx bx-pencil"></i>
-                                                            </button>
-                                                            <button class="buatListTugasButton btn btn-success btn-hover" type="button"
-                                                                data-catatan-id="{{ $catatan->id }}">
-                                                                <i class="bx bx-plus"></i>
-                                                            </button>
-                                                            <button class="btn btn-danger btn-hover btn-delete" type="button"
-                                                                data-catatan-id="{{ $catatan->id }}">
-                                                                <i class="bx bx-trash"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="hr-blue" style="border-color: blue;">
-                                                    @foreach ($tugas as $tugass)
-                                                        @if ($tugass->jadwalharian_id == $catatan->id)
-                                                            <div class="tugas-item" data-tugas-id="{{ $tugass->id }}">
-                                                                <div class="d-flex justify-content-between">
-                                                                    <p class="deskripsi-tugas">
-                                                                        Tugas {{ $loop->iteration }} |
-                                                                        {{ $tugass->DESK_TUGAS }}
-                                                                    </p>
-                                                                    <div class="button-container">
-                                                                        <button
-                                                                            class="btn btn-warning btn-sm btn-hover btn-edit-tugas"
-                                                                            type="button"
-                                                                            data-tugas-id="{{ $tugass->id }}">Edit</button>
-                                                                        <button
-                                                                            class="btn btn-danger btn-sm btn-hover btn-delete-tugas"
-                                                                            type="button"
-                                                                            data-tugas-id="{{ $tugass->id }}">Hapus</button>
-                                                                    </div>
-                                                                </div>
-                                                                <p class="informasi-tambahan">
-                                                                    <span class="tanggal">
-                                                                        {{ date('l, j-n-Y H:i', strtotime($tugass->TENGGAT_WAKTU)) }}
-                                                                        |
-                                                                    </span>
-                                                                    <span class="status">
-                                                                        Status Tugas :
-                                                                        @if ($tugass->STATUS == 1)
-                                                                            {{ 'Selesai | ' }}
-                                                                        @else
-                                                                            {{ 'Belum Selesai | ' }}
-                                                                        @endif
-                                                                    </span>
-                                                                    <span class="skala-prioritas">
-                                                                        Skala Prioritas:
-                                                                        {{ $tugass->Skala_Prioritas == 1 ? 'Penting' : 'Kurang Penting' }}
-                                                                        |
-                                                                    </span>
-                                                                </p>
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="card mt-4" style="display: none;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Form Edit Catatan Harian</h5>
-                                                <form action="{{ route('updateCatatan', $catatan->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="mb-3">
-                                                        <label for="hari" class="form-label">Hari:</label>
-                                                        <input type="date" name="hari" id="hari"
-                                                            class="form-control"
-                                                            value="{{ $date = explode(' ', $catatan->HARI)[0] }}" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="kegiatan" class="form-label">Kegiatan:</label>
-                                                        <input type="text" name="kegiatan" id="kegiatan"
-                                                            class="form-control" value="{{ $catatan->KEGIATAN }}" required>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="kategori" class="form-label">Kategori :</label>
-                                                        <select name="kategori" id="kategori" class="form-select" required>
-                                                            <option value="" selected disabled>Pilih Kategori</option>
-                                                            @foreach ($kategoris as $kategori)
-                                                                <option value="{{ $kategori->id }}"
-                                                                    {{ $catatan->kategori_id == $kategori->id ? 'selected' : '' }}>
-                                                                    {{ $kategori->Nama_Kategori }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="row mt-4">
-                                                        <div class="col-md-12">
-                                                            <div class="d-flex justify-content-center gap-2 ">
-                                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                                                <button type="button"
-                                                                    class="btn btn-danger btn-cancel-edit">Batal</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div id="addTugas" style="display: none;" data-catatan-id="{{ $catatan->id }}">
-                                            <div class="card mt-4">
-                                                <div class="card-body">
-
-                                                    <div id="tugasRow"></div>
-
-                                                    <div class="row mt-4">
-                                                        <div class="col-md-12">
-                                                            <div class="d-flex justify-content-center">
-                                                                <button type="button" class="submit-button btn btn-primary"
-                                                                    value="submit" id="submitAllForms">Simpan</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="card mt-3" style="display: none;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Form Edit Tugas</h5>
-                                                <form id="editForm" class="dynamic-form">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="row mt-3">
-                                                        <div class="col-md-12">
-                                                            <div
-                                                                class="mb-3 d-flex justify-content-between align-items-center">
-                                                                <label for="DESK_TUGAS" class="form-label">Deskripsi
-                                                                    Tugas:</label>
-                                                            </div>
-                                                            <textarea name="DESK_TUGAS" class="form-control" required></textarea>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="mb-3">
-                                                                <label for="TENGGAT_WAKTU" class="form-label">Waktu
-                                                                    Pengumpulan:</label>
-                                                                <input type="datetime-local" name="TENGGAT_WAKTU"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="mb-3">
-                                                                <label for="STATUS" class="form-label">Status Tugas:</label>
-                                                                <select name="STATUS" class="form-control" required>
-                                                                    <option value="0">Belum Selesai</option>
-                                                                    <option value="1">Selesai</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-4">
-                                                        <div class="col-md-12">
-                                                            <div class="d-flex justify-content-center gap-2">
-                                                                <button type="button" class="submit-button btn btn-primary"
-                                                                    id="submitAllForms">Simpan</button>
-                                                                <button type="button"
-                                                                    class="btn btn-danger btn-cancel-edit">Batal</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div> --}}
-
                     {{-- List Catatan --}}
                     <div class="d-flex align-items-center">
                         <h5 class="card-title text-primary" style="margin-right: 10px;">List Catatan :</h5>
@@ -419,6 +152,67 @@
                                                                 </span>
                                                             </p>
                                                         </div>
+
+                                                        {{-- Form Edit Tugas --}}
+                                                        <div class="card mt-3 edit-tugas-form" style="display: none;"
+                                                            data-catatan-id="{{ $catatan->id }}"
+                                                            data-tugas-id="{{ $tugass->id }}">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">Form Edit Tugas</h5>
+                                                                <form id="editForm" class="dynamic-form"
+                                                                    data-tugas-id="{{ $tugass->id }}">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <!-- Form edit untuk deskripsi, tenggat_waktu, status, dll. -->
+                                                                    <div class="row mt-3">
+                                                                        <div class="col-md-12">
+                                                                            <div
+                                                                                class="mb-3 d-flex justify-content-between align-items-center">
+                                                                                <label for="DESK_TUGAS"
+                                                                                    class="form-label">Deskripsi
+                                                                                    Tugas:</label>
+                                                                            </div>
+                                                                            <textarea name="DESK_TUGAS" class="form-control" required></textarea>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="mb-3">
+                                                                                <label for="TENGGAT_WAKTU"
+                                                                                    class="form-label">Waktu
+                                                                                    Pengumpulan:</label>
+                                                                                <input type="datetime-local"
+                                                                                    name="TENGGAT_WAKTU"
+                                                                                    class="form-control" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="mb-3">
+                                                                                <label for="STATUS"
+                                                                                    class="form-label">Status
+                                                                                    Tugas:</label>
+                                                                                <select name="STATUS"
+                                                                                    class="form-control" required>
+                                                                                    <option value="0">Belum Selesai
+                                                                                    </option>
+                                                                                    <option value="1">Selesai</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mt-4">
+                                                                        <div class="col-md-12">
+                                                                            <div
+                                                                                class="d-flex justify-content-center gap-2">
+                                                                                <button type="button"
+                                                                                    class="submit-button btn btn-primary"
+                                                                                    id="submitAllForms">Simpan</button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-danger btn-cancel-edit">Batal</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     @endif
                                                 @endforeach
                                             </div>
@@ -484,55 +278,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    {{-- Form Edit Tugas --}}
-                                    <div class="card mt-3" style="display: none;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Form Edit Tugas</h5>
-                                            <form id="editForm" class="dynamic-form">
-                                                @csrf
-                                                @method('PUT')
-                                                <!-- Form edit untuk deskripsi, tenggat_waktu, status, dll. -->
-                                                <div class="row mt-3">
-                                                    <div class="col-md-12">
-                                                        <div
-                                                            class="mb-3 d-flex justify-content-between align-items-center">
-                                                            <label for="DESK_TUGAS" class="form-label">Deskripsi
-                                                                Tugas:</label>
-                                                        </div>
-                                                        <textarea name="DESK_TUGAS" class="form-control" required></textarea>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="mb-3">
-                                                            <label for="TENGGAT_WAKTU" class="form-label">Waktu
-                                                                Pengumpulan:</label>
-                                                            <input type="datetime-local" name="TENGGAT_WAKTU"
-                                                                class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="mb-3">
-                                                            <label for="STATUS" class="form-label">Status Tugas:</label>
-                                                            <select name="STATUS" class="form-control" required>
-                                                                <option value="0">Belum Selesai</option>
-                                                                <option value="1">Selesai</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mt-4">
-                                                    <div class="col-md-12">
-                                                        <div class="d-flex justify-content-center gap-2">
-                                                            <button type="button" class="submit-button btn btn-primary"
-                                                                id="submitAllForms">Simpan</button>
-                                                            <button type="button"
-                                                                class="btn btn-danger btn-cancel-edit">Batal</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
 
@@ -771,45 +516,35 @@
 
         // edit tugas
         $(document).ready(function() {
-            $(document).on('click', '.btn-edit-tugas', function() {
-                let tugasId = $(this).data('tugas-id');
-                let form = $('.card.mt-3');
+            // show edit specifik
+            $('.btn-edit-tugas').on('click', function() {
+                var tugasId = $(this).data('tugas-id');
+                var catatanId = $(this).closest('.col-md-6').data('catatan-id');
 
-                let deskripsi = $(this).parent().find('.deskripsi-tugas').text();
-                let tenggatWaktu = $(this).parent().find('.tenggat-waktu').text();
-                let status = $(this).parent().find('.status-tugas').text();
-                let Skala_Prioritas = $(this).parent().find('.skala-prioritas').text();
+                // Hide all other edit forms
+                $('.edit-tugas-form').hide();
 
-                form.find('textarea[name="DESK_TUGAS"]').val(deskripsi);
-                form.find('input[name="TENGGAT_WAKTU"]').val(tenggatWaktu);
-                form.find('select[name="STATUS"]').val(status === 'selesai' ? 1 : 0);
-                form.find('select[name="Skala_Prioritas"]').val(Skala_Prioritas === 'selesai' ? 1 : 0);
-
-                form.show();
+                // Show the edit form for the clicked task
+                $('.edit-tugas-form[data-catatan-id="' + catatanId + '"][data-tugas-id="' + tugasId + '"]')
+                    .show();
             });
 
-            $(document).on('click', '.btn-cancel-edit', function() {
-                let form = $('.card.mt-3');
-                form.hide();
+            // Cancel edit
+            $('.btn-cancel-edit').on('click', function() {
+                $(this).closest('.edit-tugas-form').hide();
             });
 
-            $(document).on('click', '.submit-button', function() {
-                let form = $('#editForm');
-                let data = form.serialize();
-                let tugasId =
-                    '{{ $tugass->id ?? null }}';
-
-                if (tugasId === null) {
-                    console.log('Tugas ID is not defined');
-                    return;
-                }
+            $('.submit-button').on('click', function() {
+                var form = $(this).closest('form.dynamic-form');
+                var tugasId = form.data('tugas-id');
 
                 $.ajax({
-                    url: '/tugas/' + tugasId,
                     type: 'PUT',
-                    data: data,
+                    url: '/tugas/' + tugasId,
+                    data: form.serialize(),
                     success: function(response) {
                         console.log(response);
+                        form.hide();
                     },
                     error: function(error) {
                         console.error(error);
