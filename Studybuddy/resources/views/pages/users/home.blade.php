@@ -468,7 +468,6 @@
                                         </div>
                                     </div>
 
-
                                     {{-- Form Tambah Tugas --}}
                                     <div id="addTugas" style="display: none;" data-catatan-id="{{ $catatan->id }}">
                                         <div class="card mt-4">
@@ -743,6 +742,7 @@
             });
         });
 
+        // delete tugas
         $(document).ready(function() {
             $(document).on('click', '.btn-delete-tugas', function() {
                 let tugasId = $(this).data('tugas-id');
@@ -769,8 +769,8 @@
             });
         });
 
+        // edit tugas
         $(document).ready(function() {
-
             $(document).on('click', '.btn-edit-tugas', function() {
                 let tugasId = $(this).data('tugas-id');
                 let form = $('.card.mt-3');
@@ -816,42 +816,6 @@
                     }
                 });
             });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            // Fungsi yang dijalankan saat nilai opsi-opsi berubah
-            $('#kategoriFilter, #prioritasFilter, #statusFilter').change(function() {
-                // Panggil fungsi untuk mengambil dan menampilkan data yang sesuai dengan opsi yang dipilih
-                fetchData();
-            });
-
-            // Fungsi untuk mengambil dan menampilkan data
-            function fetchData() {
-                var kategoriFilter = $('#kategoriFilter').val();
-                var prioritasFilter = $('#prioritasFilter').val();
-                var statusFilter = $('#statusFilter').val();
-
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ route('filterCatatan') }}',
-                    data: {
-                        '_token': '{{ csrf_token() }}',
-                        'kategoriFilter': kategoriFilter,
-                        'prioritasFilter': prioritasFilter,
-                        'statusFilter': statusFilter
-                    },
-                    success: function(data) {
-                        // Manipulasi DOM untuk menampilkan data yang diterima dari server
-                        // Misalnya, ganti HTML elemen tertentu dengan data yang diterima
-                        $('#resultContainer').append(data);
-                    },
-                    error: function(error) {
-                        console.log('Error:', error);
-                    }
-                });
-            }
         });
     </script>
 @endsection
