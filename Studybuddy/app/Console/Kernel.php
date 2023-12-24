@@ -14,18 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
 {
-    $schedule->call(function () {
-        // Logika untuk mengirim email
-        $usersWithNearDeadline = \App\Models\Tugas::where('TENGGAT_WAKTU', '<=', now()->addMinutes(5))
-            ->where('TENGGAT_WAKTU', '>', now())
-            ->where('STATUS', 0)
-            ->get();
-
-        foreach ($usersWithNearDeadline as $tugas) {
-            $user = $tugas->users;
-            \Illuminate\Support\Facades\Mail::to($user->EMAIL)->send(new \App\Mail\DeadlineApproaching($tugas));
-        }
-    })->everyMinute();
+    $schedule->command('send:task-reminder')->everyMinute();
 }
 
     /**
