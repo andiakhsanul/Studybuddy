@@ -23,7 +23,6 @@ class Kernel extends ConsoleKernel
 
         foreach ($usersWithNearDeadline as $tugas) {
             $user = $tugas->users;
-            // Mengirim email ke $user
             \Illuminate\Support\Facades\Mail::to($user->EMAIL)->send(new \App\Mail\DeadlineApproaching($tugas));
         }
     })->everyMinute();
